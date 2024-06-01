@@ -1,0 +1,63 @@
+.organization__container{
+    box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
+    background-color: white;
+    min-height: 75vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 6%;
+}
+
+.form__search{
+    margin-top: 50px;
+}
+
+.form_input{
+    border-radius: 1rem;
+    padding-left:15px;
+    width: 473px;
+    height: 45px;
+    border:none;
+    background-color: #f9f0f0;;
+}
+
+
+.form__search button{
+    margin-left: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #e7b3b3;
+    border: none;
+    border-radius: 25px; /* Задаем радиус скругления */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.organization__item{
+    padding: 10px;
+    width: 300px;
+    height: 50px;
+    transition: all 0.2s;
+}
+.organization__item:hover{
+    transform: scale(1.05);
+}
+
+.organization__list{
+
+    cursor: pointer;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+.organization__name{
+    font-size: large;
+}

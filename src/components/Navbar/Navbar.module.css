@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    height: 200px;
+    justify-content: flex-end;
+    align-items: center;
+   
+}
+
+.navbar__link{
+    display: inline-block;
+}

@@ -1,0 +1,101 @@
+.main__container{
+    box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
+    background-color: white;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 6%;
+    justify-content: center
+}
+
+.registraion{
+    display: flex;
+    justify-content: center;
+    width: 800px;
+}
+
+.registraion__list{
+    margin-top: 55px;
+    display: flex;
+    gap: 33px;
+    flex-direction: column;
+}
+h2{
+    font-size: 27px;
+    margin-top: 75px;
+}
+
+.registraion__item label{
+    font-weight: 500;
+    font-size: 23px;
+
+}
+
+.registraion__item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.registraion__item input{
+    text-align: center;
+    font-weight: 500;
+    border: none;
+    height: 33px;
+    background-color: #f9f0f0;
+
+}
+
+
+
+.registraion__checkbox{
+    margin-top: 30%;
+}
+
+
+.registraion__span{
+    color: #8367c4;
+
+}
+
+.registraion__button{
+    display: flex;
+    margin-top: 7%;
+    justify-content: center;
+}
+
+.registraion__button button{
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #E89F71;
+    border: 1px solid #E89F71;
+    width: 245px;
+    height: 48px;
+    background-color: #fff;
+    
+   
+
+}
+
+.registraion__button button:disabled{
+    color: #c9bcb3;
+    border: 1px solid #c9bcb3;
+
+    
+}
+
+
+.registraion__checkbox{
+    display: flex;
+    align-items:center;
+}
+
+.registraion__checkbox input{
+    width: 30px;
+    height: 16px;
+}
+.login_link{
+    display: flex;
+    justify-content: center;
+}
