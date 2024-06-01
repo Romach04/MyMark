@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import {authRoutes, publicRoutes} from '../routes'
 import {Routes, Route, Navigate} from 'react-router-dom';
-import { MAINPAGE_ROUTER, SHOP_ROUTER } from "../utils/const";
+import {REGISTRATION_ROUTER } from "../utils/const";
 import { Context } from "../index";
 
 const AppRouter = () => {
@@ -16,7 +16,7 @@ const AppRouter = () => {
             {publicRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} element={<Component/>} exact/>
             )}
-             <Route path='*' element={<Navigate to={MAINPAGE_ROUTER}/>} />
+             <Route path='*' element={<Navigate to={REGISTRATION_ROUTER}/>} />
         </Routes>
     );
 }

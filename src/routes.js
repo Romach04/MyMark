@@ -1,12 +1,15 @@
 import MainPage from "./pages/MainPage/MainPage";
 import Registraion from './pages/ClientRoute/Registration/Registraion';
 import ServiceSelection from './pages/ClientRoute/ServiceSelection/ServiceSelection';
+import ParticipantSelect from './pages/ClientRoute/ParticipantSelect/ParticipantSelect';
+
+
 import OrganizationSelect from "./pages/ClientRoute/OrganizationSelect/OrganizationSelect";
 import OrganizationItem from "./pages/ClientRoute/OrganizationItem/OrganizationItem";
 import OrganizationConfirm from "./pages/ClientRoute/OrganizationConfirm/OrganizationConfirm";
 import Login from "./pages/ClientRoute/Login/Login";
 
-import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SERVICES_ROUTER, ORGANIZATION_ROUTER, CONFIRM_ROUTER } from "./utils/const";
+import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SERVICES_ROUTER, ORGANIZATION_ROUTER, CONFIRM_ROUTER, PARTICIPANT_ROUTER } from "./utils/const";
 
 export const authRoutes = [
     // {
@@ -34,6 +37,11 @@ export const publicRoutes = [
     {
         path: SERVICES_ROUTER,
         Component: ServiceSelection
+    },
+
+    {
+        path: PARTICIPANT_ROUTER,
+        Component: ParticipantSelect
     },
     {
         path: ORGANIZATION_ROUTER,

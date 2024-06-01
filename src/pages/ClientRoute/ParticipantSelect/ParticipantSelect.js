@@ -3,11 +3,12 @@ import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { PARTICIPANT_ROUTER } from '../../../utils/const';
 
-import styles from './ServiceSelection.module.css';
+import { ORGANIZATION_ROUTER } from '../../../utils/const';
 
-const ServiceSelection = observer(() => {
+import styles from './ParticipantSelect.module.css';
+
+const ParticipantSelect = observer(() => {
 
     const navigate = useNavigate();
 
@@ -20,10 +21,9 @@ const ServiceSelection = observer(() => {
 
     const handleNext = () => {
         user.setSelectedSport(selectedSport);
-        
         // user.printUserData();
 
-        navigate(PARTICIPANT_ROUTER);
+        navigate(ORGANIZATION_ROUTER);
     };
 
     const handleSubmit = (e) => {
@@ -37,7 +37,7 @@ const ServiceSelection = observer(() => {
         <div className={styles.main__container}>
             <form  className={styles.services_form} onSubmit={handleSubmit}>
                 <div>
-                    <h2>Виды спорта</h2>
+                    <h2>Список участников</h2>
                 </div>
                 <div className={styles.services}>
                     {user.typeSport.map(item => (
@@ -69,7 +69,7 @@ const ServiceSelection = observer(() => {
     );
 });
 
-export default ServiceSelection;
+export default ParticipantSelect;
 
 
 
