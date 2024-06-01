@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { PARTICIPANT_ROUTER } from '../../../utils/const';
+import { ORGANIZATION_ROUTER } from '../../../utils/const';
 
 import styles from './ServiceSelection.module.css';
 
@@ -23,7 +23,7 @@ const ServiceSelection = observer(() => {
         
         // user.printUserData();
 
-        navigate(PARTICIPANT_ROUTER);
+        navigate(ORGANIZATION_ROUTER);
     };
 
     const handleSubmit = (e) => {

@@ -42,9 +42,9 @@ const Registraion = observer(() => {
             .required('Обязательное поле'),
             email: Yup.string().email('Неверный формат email').required('Обязательное поле'),
             password: Yup.string()
-            .min(2, "Миниум 2 символа")
+            .min(5, "Миниум 5 символов")
             .required('Обязательное поле'),
-            terms: Yup.boolean().oneOf([true], 'Вы должны принять условия'),
+
         }),
         onSubmit: (values) => {
 
@@ -134,20 +134,7 @@ const Registraion = observer(() => {
                         </div>
                     </div>
                     
-                    <div className={styles.registraion__checkbox}>
-                        
-                        <input
-                        type="checkbox"
-                        checked={formik.values.terms}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        name="terms"
-                        required
-                          
-                        />
-                        <label>Принимаю условия <span className={styles.registraion__span}>политики конфиденциальности</span></label>
-
-                    </div>
+                  
 
                     <div className={styles.registraion__button}>
 

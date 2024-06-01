@@ -14,9 +14,27 @@ export default class UserStore {
     ]
 
 
+    selectedParticipants = [
+        {id: 0, surname: "Смирнов", name: "Владимир", middle_name: "Сергеевич", sport_id : 0 },
+        {id: 0, surname: "Сергеев", name: "Александр", middle_name: "Владимирович", sport_id : 0 },
+        {id: 2, surname: "Соколов", name: "Владимир", middle_name: "Сергеевич", sport_id : 0 },
+        {id: 3, surname: "Минеев", name: "Никита", middle_name: "Викторович", sport_id : 0 }
+
+    ]
+
+
     setSelectedSport(sport) {
         this.selectedSport = sport;
     }
+
+
+    setSelectedParticipants(participants){
+        this.participants = participants;
+    }
+
+
+
+    
 
 
     printUserData() {
