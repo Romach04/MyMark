@@ -1,14 +1,14 @@
 import MainPage from "./pages/MainPage/MainPage";
 import Registraion from './pages/ClientRoute/Registration/Registraion';
-import ServiceSelection from './pages/ClientRoute/ServiceSelection/ServiceSelection';
+import SportSelection from './pages/ClientRoute/SportSelection/SportSelection';
 
 
-import OrganizationSelect from "./pages/ClientRoute/OrganizationSelect/OrganizationSelect";
+import ParticantSelect from "./pages/ClientRoute/ParticantSelect/ParticantSelect";
 import OrganizationItem from "./pages/ClientRoute/OrganizationItem/OrganizationItem";
 import OrganizationConfirm from "./pages/ClientRoute/OrganizationConfirm/OrganizationConfirm";
 import Login from "./pages/ClientRoute/Login/Login";
 
-import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SERVICES_ROUTER, ORGANIZATION_ROUTER, CONFIRM_ROUTER } from "./utils/const";
+import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SPORT_ROUTER, PARTICANT_ROUTER, CONFIRM_ROUTER } from "./utils/const";
 
 export const authRoutes = [
     // {
@@ -34,17 +34,21 @@ export const publicRoutes = [
     },
 
     {
-        path: SERVICES_ROUTER,
-        Component: ServiceSelection
+        path: SPORT_ROUTER,
+        Component: SportSelection
     },
     {
-        path: ORGANIZATION_ROUTER,
-        Component: OrganizationSelect
+        path: PARTICANT_ROUTER,
+        Component: ParticantSelect
     },
     {
-        path: ORGANIZATION_ROUTER + '/:id',
+        path: PARTICANT_ROUTER + '/:id',
         Component: OrganizationItem
     },
+
+
+
+
 
     {
         path: CONFIRM_ROUTER,

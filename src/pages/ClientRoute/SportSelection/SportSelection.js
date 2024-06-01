@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { ORGANIZATION_ROUTER } from '../../../utils/const';
+import { PARTICANT_ROUTER } from '../../../utils/const';
 
-import styles from './ServiceSelection.module.css';
+import styles from './SportSelection.module.css';
 
-const ServiceSelection = observer(() => {
+const SportSelection = observer(() => {
 
     const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const ServiceSelection = observer(() => {
         
         // user.printUserData();
 
-        navigate(ORGANIZATION_ROUTER);
+        navigate(PARTICANT_ROUTER);
     };
 
     const handleSubmit = (e) => {
@@ -69,7 +69,7 @@ const ServiceSelection = observer(() => {
     );
 });
 
-export default ServiceSelection;
+export default SportSelection;
 
 
 

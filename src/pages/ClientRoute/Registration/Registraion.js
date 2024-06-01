@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 
 
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
-import { SERVICES_ROUTER, LOGIN_ROUTER } from '../../../utils/const';
+import { SPORT_ROUTER, LOGIN_ROUTER } from '../../../utils/const';
 
 import InputMask from 'react-input-mask';
 
@@ -56,7 +56,7 @@ const Registraion = observer(() => {
             user.setEmail(values.email);
             user.setPassword(values.password);
 
-            navigate(SERVICES_ROUTER);
+            navigate(SPORT_ROUTER);
         },
     });
 

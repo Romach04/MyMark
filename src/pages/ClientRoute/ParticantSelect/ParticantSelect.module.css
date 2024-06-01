@@ -1,4 +1,4 @@
-.organization__container{
+.participant__container{
     box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
     background-color: white;
     min-height: 75vh;
@@ -38,17 +38,18 @@
 }
 
 
-.organization__item{
+.participant__item{
+    white-space: nowrap;
     padding: 10px;
     width: 300px;
     height: 50px;
     transition: all 0.2s;
 }
-.organization__item:hover{
+.participant__item:hover{
     transform: scale(1.05);
 }
 
-.organization__list{
+.participant__list{
 
     cursor: pointer;
     margin-top: 50px;
@@ -58,6 +59,6 @@
 
 }
 
-.organization__name{
+.participant_name{
     font-size: large;
 }

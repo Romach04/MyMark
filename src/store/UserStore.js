@@ -15,10 +15,10 @@ export default class UserStore {
 
 
     selectedParticipants = [
-        {id: 0, surname: "Смирнов", name: "Владимир", middle_name: "Сергеевич", sport_id : 0 },
-        {id: 0, surname: "Сергеев", name: "Александр", middle_name: "Владимирович", sport_id : 0 },
-        {id: 2, surname: "Соколов", name: "Владимир", middle_name: "Сергеевич", sport_id : 0 },
-        {id: 3, surname: "Минеев", name: "Никита", middle_name: "Викторович", sport_id : 0 }
+        {id: 0, surname: "Смирнов", name: "Владимир", middleName: "Сергеевич", sportEntity: {sport_id : 0, sportName : "Гимнастика"} },
+        {id: 1, surname: "Сергеев", name: "Александр", middleName: "Владимирович", sportEntity: {sport_id : 0, sportName : "Гимнастика"} },
+        {id: 2, surname: "Соколов", name: "Владимир", middleName: "Сергеевич", sportEntity: {sport_id : 1, sportName : "Лыжи"} },
+        {id: 3, surname: "Минеев", name: "Никита", middllName: "Викторович", sportEntity: {sport_id : 3, sportName : "Бальные танцы"} }
 
     ]
 
@@ -34,7 +34,7 @@ export default class UserStore {
 
 
 
-    
+
 
 
     printUserData() {
