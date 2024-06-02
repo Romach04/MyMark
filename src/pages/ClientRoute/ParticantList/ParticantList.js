@@ -3,14 +3,14 @@ import { observer } from 'mobx-react-lite';
 
 import { Context } from '../../../index';
 import { useNavigate } from 'react-router-dom';
-import styles from './ParticantSelect.module.css';
+import styles from './ParticantList.module.css';
 import { PARTICANT_ROUTER } from '../../../utils/const';
 
 
 
 
 
-const ParticantSelect = observer(() => {
+const ParticantList = observer(() => {
     const { user } = useContext(Context);
     const navigate = useNavigate();
 
@@ -86,4 +86,4 @@ const ParticantSelect = observer(() => {
     );
 });
 
-export default ParticantSelect;
+export default ParticantList;

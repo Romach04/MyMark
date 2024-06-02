@@ -1,4 +1,4 @@
-.services__container{
+.participant__container{
     box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
     background-color: white;
     min-height: 75vh;
@@ -11,13 +11,17 @@
 
 }
 
-.services__list{
+.criteria__form{
     flex-direction: column;
     display: flex;
     gap: 30px;
 
 }
 
-.service__item label{
+.criteria__item label{
     margin-left: 10px;
+}
+
+button:disabled{
+    color: rgb(48, 21, 4);
 }

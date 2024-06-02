@@ -4,7 +4,7 @@ export default class UserStore {
     email = '';
     password = '';
     phoneNumber = null;
-    selectedSport = {};
+    selectedSport = {id: 0, sport_name: 'Гимнастика'};
 
     typeSport = [
         {id: 0, sport_name: 'Гимнастика'},
@@ -20,6 +20,21 @@ export default class UserStore {
         {id: 2, surname: "Соколов", name: "Владимир", middleName: "Сергеевич", sportEntity: {sport_id : 1, sportName : "Лыжи"} },
         {id: 3, surname: "Минеев", name: "Никита", middllName: "Викторович", sportEntity: {sport_id : 3, sportName : "Бальные танцы"} }
 
+    ]
+
+
+
+
+    setParticipantScores(participant){
+        this.articipant = participant;
+    }
+
+
+
+    criteria = [
+        {name: "Ловкость"},
+        {name: "Сила"},
+        {name: "Выносливость"}
     ]
 
 

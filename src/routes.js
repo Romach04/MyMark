@@ -3,8 +3,8 @@ import Registraion from './pages/ClientRoute/Registration/Registraion';
 import SportSelection from './pages/ClientRoute/SportSelection/SportSelection';
 
 
-import ParticantSelect from "./pages/ClientRoute/ParticantSelect/ParticantSelect";
-import OrganizationItem from "./pages/ClientRoute/OrganizationItem/OrganizationItem";
+import ParticantList from "./pages/ClientRoute/ParticantList/ParticantList";
+import ParticantItem from "./pages/ClientRoute/ParticantItem/ParticantItem";
 import OrganizationConfirm from "./pages/ClientRoute/OrganizationConfirm/OrganizationConfirm";
 import Login from "./pages/ClientRoute/Login/Login";
 
@@ -39,11 +39,11 @@ export const publicRoutes = [
     },
     {
         path: PARTICANT_ROUTER,
-        Component: ParticantSelect
+        Component: ParticantList
     },
     {
         path: PARTICANT_ROUTER + '/:id',
-        Component: OrganizationItem
+        Component: ParticantItem
     },
 
 
