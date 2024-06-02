@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '../../../index';
 import styles from './Admin.module.css';
 import CreateСriteria from "../../../components/modals/CreateСriteria";
+import CreatePatricant from "../../../components/modals/CreatePatricant";
 import { Button, Container } from "react-bootstrap";
 
 const Admin = observer(() => {
@@ -14,25 +15,25 @@ const Admin = observer(() => {
 
     return (
         <div className={styles.container}>
-            <Container className="d-flex flex-column ">
-            <Button
-                onClick={() => setCriteriaVis(true)}
-                variant="outline-success" 
-                className="mt-2"
-                >Добавить критерий оценки
-            </Button>
-            <Button 
-                onClick={() => setParticantVis(true)}
-                variant="outline-success" 
-                className="mt-2"
-                >Добавить участника
-            </Button>
-            <CreateСriteria show={criteriaVis} onHide={() => setCriteriaVis(false)}/>
+            <Container className="d-flex flex-column mt-5 ">
+                <Button
+                    onClick={() => setCriteriaVis(true)}
+                    variant="outline-secondary" 
+                    className="mt-2"
+                    >Добавить критерий оценки
+                </Button>
+                <Button 
+                    onClick={() => setParticantVis(true)}
+                    variant="outline-secondary" 
+                    className="mt-2"
+                    >Добавить участника
+                </Button>
+                <CreateСriteria show={criteriaVis} onHide={() => setCriteriaVis(false)}/>
+                
+                <CreatePatricant show={particantVis} onHide={() => setParticantVis(false)}/>
+    
 
-            {/* <CreateDevice show={deviceVis} onHide={() => setDeviceVis(false)}/> */}
- 
-
-        </Container>
+            </Container>
         </div>
     );
 });

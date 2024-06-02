@@ -4,10 +4,10 @@ import styles from "./Navbar.module.css"
 import { Context } from '../../index';
 import svgImage from '../../assets/svg/exit.svg'
 import { useNavigate, useLocation } from 'react-router-dom';
+import logo from '../../assets/logo.jpg'
+import { ADMIN_ROUTER, SPORT_ROUTER } from '../../utils/const';
 
-import { ADMIN_ROUTER } from '../../utils/const';
-
-// import { Button, Container, Nav } from "react-bootstrap";
+import { Button, Container, NavLink, Image } from "react-bootstrap";
 const Navbar = () => {
 
     const { user } = useContext(Context);
@@ -20,13 +20,13 @@ const Navbar = () => {
 
         <div className={styles.container}>
             
-            <div className={styles.navbar__header}>
-                <button
+                {/* <NavLink style={{color:'white'}} onClick={navigate(SPORT_ROUTER)}>Моя оценка</NavLink> */}
+                <Image  width={30} height={30} className='me-auto ms-2' src={logo}/>
+                <Button
                         variant='outline-light'
                         onClick={() => navigate(ADMIN_ROUTER)}
                         >Админ меню
-                </button>
-            </div>
+                </Button>
         </div>
     );
 };
