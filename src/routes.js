@@ -5,10 +5,11 @@ import SportSelection from './pages/ClientRoute/SportSelection/SportSelection';
 
 import ParticantList from "./pages/ClientRoute/ParticantList/ParticantList";
 import ParticantItem from "./pages/ClientRoute/ParticantItem/ParticantItem";
-import OrganizationConfirm from "./pages/ClientRoute/OrganizationConfirm/OrganizationConfirm";
+import Admin from "./pages/ClientRoute/Admin/Admin";
+
 import Login from "./pages/ClientRoute/Login/Login";
 
-import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SPORT_ROUTER, PARTICANT_ROUTER, CONFIRM_ROUTER } from "./utils/const";
+import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SPORT_ROUTER, PARTICANT_ROUTER, ADMIN_ROUTER } from "./utils/const";
 
 export const authRoutes = [
     // {
@@ -46,13 +47,9 @@ export const publicRoutes = [
         Component: ParticantItem
     },
 
-
-
-
-
     {
-        path: CONFIRM_ROUTER,
-        Component: OrganizationConfirm
+        path: ADMIN_ROUTER,
+        Component: Admin
     },
     
 ]

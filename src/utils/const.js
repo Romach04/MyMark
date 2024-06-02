@@ -10,5 +10,5 @@ export const PARTICANT_ROUTER = '/particant'
 
 
 
-export const CONFIRM_ROUTER = '/organization/confirm'
+export const ADMIN_ROUTER = '/organization/confirm'
 

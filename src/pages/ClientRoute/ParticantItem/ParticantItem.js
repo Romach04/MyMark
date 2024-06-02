@@ -4,7 +4,6 @@ import {useNavigate, useParams} from 'react-router-dom';
 import { Context } from '../../../index';
 import styles from './ParticantItem.module.css';
 
-import { ORGANIZATION_ROUTER, CONFIRM_ROUTER } from '../../../utils/const';
 import Button from "../../../components/Button";
 
 const ParticantItem = observer(() => {
