@@ -6,14 +6,14 @@ import { Context } from '../../index';
 import svgImage from '../../assets/svg/exit.svg'
 import Nav from 'react-bootstrap/Nav';
 
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.jpg';
 
-import { ADMIN_ROUTER, SPORT_ROUTER, LOGIN_ROUTER } from '../../utils/const';
+import { ADMIN_ROUTER, SPORT_ROUTER, LOGIN_ROUTER, REGISTRATION_ROUTER } from '../../utils/const';
 
 import {logOut} from '../http/userApi';
 
-import { Button, Container, NavLink, Image } from "react-bootstrap";
+import { Button, Container, Image } from "react-bootstrap";
 
 const Navbar = () => {
 
@@ -21,6 +21,8 @@ const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+
+    const isShowUserBar =  localStorage.getItem('authorization');
 
 
     const handelLogout = async () => {
@@ -32,6 +34,7 @@ const Navbar = () => {
 
                 user.setIsAuth(false);
                 user.setUsername('');
+                localStorage.removeItem('authorization');
 
                 navigate(LOGIN_ROUTER);
             } else {
@@ -47,10 +50,10 @@ const Navbar = () => {
 
         <div className={styles.container}>
             
-                {/* <NavLink style={{color:'white'}} onClick={navigate(SPORT_ROUTER)}>Моя оценка</NavLink>  */}
+                <NavLink style={{color:'white'}}  to={LOGIN_ROUTER}>Моя оценка</NavLink> 
                 <Image  width={30} height={30} className='me-auto ms-2' src={logo}/>
                 
-                {user.isAuth? 
+                {isShowUserBar? 
 
                 <Nav className="ml-auto" style={{color:'white'}}>
                     <Button

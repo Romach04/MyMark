@@ -49,7 +49,10 @@ h2{
 
 
 .registraion__checkbox{
-    margin-top: 30%;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
 }
 
 

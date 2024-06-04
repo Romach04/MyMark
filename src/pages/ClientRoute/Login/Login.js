@@ -4,30 +4,20 @@ import { observer } from 'mobx-react-lite';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { SPORT_ROUTER, REGISTRATION_ROUTER } from '../../../utils/const';
 
-import InputMask, {unmask} from 'react-input-mask';
 
 import {Context} from '../../../index'
 
 import styles from './Login.module.css'
-import { getSport, loginUser } from "../../../components/http/userApi";
+import {loginUser } from "../../../components/http/userApi";
 
 const Login = observer(() => {
     const navigate = useNavigate();
     const { user } = useContext(Context);
 
     const [loginError, setLoginError] = useState('');
-
-    async function sss() {
-
-        const sport = await getSport();
-        console.log(sport)
-    }
-
-    sss();
 
 
     const formik = useFormik({
@@ -65,6 +55,8 @@ const Login = observer(() => {
                     user.setUsername(values.username);
 
                     user.setIsAuth(true);
+
+                    localStorage.setItem('authorization', true)
 
                     console.log('Navigating to SPORT_ROUTER');
                     navigate(SPORT_ROUTER);

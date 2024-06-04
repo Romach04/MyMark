@@ -3,10 +3,10 @@
 import api from './api';
 
 
-
 export const registerUser = async (userData) => {
     try {
         const response = await api.post(`/register/user`, userData);
+        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('Error registering user:', error);
@@ -14,17 +14,6 @@ export const registerUser = async (userData) => {
     }
 };
 
-export const getSport = async () => {
-    try {
-        const response = await api.get(`/sport`);
-        console.log(response);
-
-        return response.data;
-    } catch (error) {
-        console.error('Error registering user:', error);
-        throw error;
-    }
-}
 
 export const loginUser = async (loginData) => {
 

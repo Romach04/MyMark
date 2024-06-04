@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { PARTICANT_ROUTER } from '../../../utils/const';
-
+import { getSport } from "../../../components/http/particantApi";
 import styles from './SportSelection.module.css';
 
 const SportSelection = observer(() => {
@@ -12,6 +12,13 @@ const SportSelection = observer(() => {
     const navigate = useNavigate();
 
     const { user } = useContext(Context);
+
+    const {particant} = useContext(Context);
+
+    useEffect(() => {
+        getSport().then(data => particant.setTypeSport(data))
+                  .then(console.log(particant._selectedSport))
+    }, [particant])
 
     const [selectedSport, setSelectedSport] = useState(null);
 
@@ -31,6 +38,12 @@ const SportSelection = observer(() => {
         handleNext();
     };
 
+    // async function responce () {
+    //     const data = await getSport();
+    //     console.log(data)
+    // }
+
+    // responce();
 
 
     return (

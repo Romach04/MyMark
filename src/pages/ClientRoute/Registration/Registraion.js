@@ -4,12 +4,9 @@ import { observer } from 'mobx-react-lite';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import axios from 'axios';
-
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
-import { SPORT_ROUTER, LOGIN_ROUTER } from '../../../utils/const';
+import { LOGIN_ROUTER } from '../../../utils/const';
 import { registerUser } from "../../../components/http/userApi";
-import InputMask from 'react-input-mask';
 
 import {Context} from '../../../index'
 
@@ -30,41 +27,38 @@ const Registraion = observer(() => {
     const formik = useFormik({
 
         initialValues: {
-            phoneNumber: '',
-            email: '',
+            username: '',
             password: '',
-            terms: false,
+            adminRoot: false,
         },
         validationSchema: Yup.object({
-            phoneNumber: Yup.string()
-            .test('full-number', 'Введите полный номер телефона', (value) => {
-
-                const phoneNumberWithoutSeparators = value ? value.replace(/\D/g, '') : '';
-                return phoneNumberWithoutSeparators.length >= 11;
-            })
+    
+            username: Yup.string().min(5, "Миниум 5 символов")
             .required('Обязательное поле'),
-            email: Yup.string().email('Неверный формат email').required('Обязательное поле'),
+
             password: Yup.string()
             .min(5, "Миниум 5 символов")
             .required('Обязательное поле'),
 
+
         }),
         onSubmit: async (values) => {
 
-            let unmaskedPhoneNumber = values.phoneNumber.replace(/\D/g, '');
-
-            unmaskedPhoneNumber = Number(unmaskedPhoneNumber);
-
+            const roleRequest = values.adminRoot ? "ADMIN,USER": "USER"
             const userData = {
-                username: values.email,
+                username: values.username,
                 password: values.password,
-                role: 'ADMIN,USER', 
+                role: roleRequest, 
             };
 
             try {
                 const response = await registerUser(userData);
 
                 setRegistrationMessage('Регистрация успешна!');
+
+                values.username = '';
+                values.password = '';
+                values.adminRoot = false;
 
                 setTimeout(() => {
                     setRegistrationMessage('');
@@ -83,15 +77,6 @@ const Registraion = observer(() => {
                 }, 3000);
             }
 
-
-
-
-
-            user.setPhoneNumber(unmaskedPhoneNumber);
-            user.setEmail(values.email);
-            user.setPassword(values.password);
-
-            // navigate(SPORT_ROUTER);
         },
     });
 
@@ -107,44 +92,23 @@ const Registraion = observer(() => {
             <div className={styles.registraion}>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={styles.registraion__list}>
-                        <div className={styles.registraion__item} >
-                            <label>Номер телефона</label>
-                            <InputMask
-                                mask="8 (999) 999-99-99"
-                                maskChar="_"
-                                type="tel"
-                                placeholder="Номер телефона"
-
-                                value={formik.values.phoneNumber}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                name="phoneNumber"
-                                required
-                            />
-                            
-                            
-                        </div>
-
-                        {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-                                <div className={styles.error}>{formik.errors.phoneNumber}</div>
-                        )}
 
                         <div className={styles.registraion__item}>
-                            <label>Email</label>  
+                            <label>Логин</label>  
                             <input
-                                type="email"
-                                placeholder="Email"
-                                value={formik.values.email}
+                                type="text"
+                                placeholder="Логин"
+                                value={formik.values.username}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                name="email"
+                                name="username"
                                 required
                             />
                             
                         </div>
 
-                        {formik.errors.email && formik.touched.email && (
-                                <div className={styles.error}>{formik.errors.email}</div>
+                        {formik.errors.username && formik.touched.username && (
+                                <div className={styles.error}>{formik.errors.username}</div>
                         )}
 
                         <div className={styles.registraion__item}>
@@ -164,10 +128,26 @@ const Registraion = observer(() => {
                         {formik.errors.password && formik.touched.password && (
                                 <div className={styles.error}>{formik.errors.password}</div>
                         )}
+                        <div className={styles.registraion__checkbox}>
+                        
+                            <input
+                            type="checkbox"
+                            checked={formik.values.adminRoot}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            name="adminRoot"
+
+                            
+                            />
+                            <label>Права администратора</label>
+
+                        </div>
                         <div className={styles.login_link}>
                             <NavLink to={LOGIN_ROUTER}>Войти в аккаунт</NavLink>
                         </div>
                     </div>
+
+                    
                     
         
                     <div className={styles.info_message}>

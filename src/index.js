@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import UserStore from './store/UserStore';
-import OrganizationStore from './store/OrganizationStore';
+import ParticantStore from './store/ParticantStore';
 
 
 export const Context = createContext(null)
@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
     <Context.Provider value={{
       user: new UserStore(),
-      organization: new OrganizationStore(),
+      particant: new ParticantStore(),
     }}>
       <App />
     </Context.Provider>
