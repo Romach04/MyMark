@@ -21,40 +21,60 @@ const Login = observer(() => {
 
     const [loginError, setLoginError] = useState('');
 
+    async function sss() {
+
+        const sport = await getSport();
+        console.log(sport)
+    }
+
+    sss();
+
+
     const formik = useFormik({
         initialValues: {
             
-            email: '',
+            username: '',
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().required('Обязательное поле'),
+            username: Yup.string().required('Обязательное поле'),
             password: Yup.string()
             .min(2, "Миниум 2 символа")
             .required('Обязательное поле'),
             
         }),
         onSubmit: async (values) => {
-            console.log(values.email, values.password);
+            console.log(values.username, values.password);
+
             try {
                 const loginData = {
-                    username: values.email,
+                    username: values.username,
                     password: values.password,
                 };
                 
 
                 
-                const response = await loginUser(loginData);
+                const status = await loginUser(loginData);
 
-                if (response.ok) {
-                    user.setEmail(values.email);
-                    user.setPassword(values.password);
+                console.log("Login Response Status: ", status); // Для отладки
+
+                if (status === 200) {
+
+
+
+                    user.setUsername(values.username);
+
                     user.setIsAuth(true);
 
+                    console.log('Navigating to SPORT_ROUTER');
                     navigate(SPORT_ROUTER);
                 } else {
                     setLoginError('Неверный логин или пароль');
+                    setTimeout(() => {
+                        setLoginError('');
+                    }, 3000);
                 }
+
             } catch (error) {
                 console.error('Error logging in:', error);
                 setLoginError('Неверный логин или пароль');
@@ -63,8 +83,6 @@ const Login = observer(() => {
                 }, 3000);
             }
             
-            const responce = await getSport();
-            console.log(responce)
         },
 
         });
@@ -82,21 +100,21 @@ const Login = observer(() => {
                     <div className={styles.login__list}>
 
                         <div className={styles.login__item}>
-                            <label>Email</label>  
+                            <label>Логин</label>  
                             <input
                                 type="text"
                                 placeholder="Логин"
-                                value={formik.values.email}
+                                value={formik.values.username}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                name="email"
+                                name="username"
                                 required
                             />
                             
                         </div>
 
-                        {formik.errors.email && formik.touched.email && (
-                                <div className={styles.error}>{formik.errors.email}</div>
+                        {formik.errors.username && formik.touched.username && (
+                                <div className={styles.error}>{formik.errors.username}</div>
                         )}
 
                         <div className={styles.login__item}>
@@ -119,7 +137,13 @@ const Login = observer(() => {
                         <div className={styles.login_link}>
                             <NavLink to={REGISTRATION_ROUTER}>Зарегистрироваться</NavLink>
                         </div>
-                    </div>    
+                    </div>  
+
+                    <div className={styles.info_message}>
+                        
+                        {loginError && <div className={styles.errorAuth}>{loginError}</div>}
+            
+                    </div>
 
                     <div className={styles.login__button}>
 

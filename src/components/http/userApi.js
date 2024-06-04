@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 
 import api from './api';
 
@@ -18,7 +18,7 @@ export const getSport = async () => {
     try {
         const response = await api.get(`/sport`);
         console.log(response);
-        
+
         return response.data;
     } catch (error) {
         console.error('Error registering user:', error);
@@ -32,33 +32,42 @@ export const loginUser = async (loginData) => {
     formData.append('username', loginData.username);
     formData.append('password', loginData.password);
 
-    // try {
-    //     const response = await api.post('/login', formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //         },
-    //     });
-    //     return response.data;
-    // } catch (error) {
-    //     console.error('Error logging in:', error);
-    //     throw error;
-    // }
+
 
     try{
         const response = await fetch("http://localhost:8080/login", {
             method: 'POST',
-            body: formData
+            body: formData,
+            credentials: 'include',
           });
   
 
-        console.log(response)
-        return response.data;
+
+        return response.status;
 
     } catch(error) {
         console.error('Error logging in:', error);
         throw error;
     }
 };
+
+export const logOut = async () => {
+    try {
+        const response = await fetch("http://localhost:8080/logout", {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            return response.status;
+        } else {
+            throw new Error('Ошибка при выходе из системы');
+        }
+    } catch (error) {
+        console.error('Error logging out:', error);
+        throw error;
+    }
+}
 
 
 

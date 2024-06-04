@@ -8,7 +8,7 @@ export default class UserStore {
         makeAutoObservable(this)
     }
 
-    email = '';
+    username = '';
     password = '';
     phoneNumber = null;
     selectedSport = {id: 0, sport_name: 'Гимнастика'};
@@ -35,6 +35,9 @@ export default class UserStore {
         {name: "Выносливость"}
     ]
 
+    setUsername(username){
+        this.username = username;
+    }
 
     setParticipantScores(participant){
         this.articipant = participant;
