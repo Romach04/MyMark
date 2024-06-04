@@ -13,10 +13,13 @@ import InputMask, {unmask} from 'react-input-mask';
 import {Context} from '../../../index'
 
 import styles from './Login.module.css'
+import { getSport, loginUser } from "../../../components/http/userApi";
 
 const Login = observer(() => {
     const navigate = useNavigate();
     const { user } = useContext(Context);
+
+    const [loginError, setLoginError] = useState('');
 
     const formik = useFormik({
         initialValues: {
@@ -25,21 +28,46 @@ const Login = observer(() => {
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().email('Неверный формат email').required('Обязательное поле'),
+            email: Yup.string().required('Обязательное поле'),
             password: Yup.string()
             .min(2, "Миниум 2 символа")
             .required('Обязательное поле'),
             
         }),
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
+            console.log(values.email, values.password);
+            try {
+                const loginData = {
+                    username: values.email,
+                    password: values.password,
+                };
+                
 
+                
+                const response = await loginUser(loginData);
 
-            user.setEmail(values.email);
-            user.setPassword(values.password);
+                if (response.ok) {
+                    user.setEmail(values.email);
+                    user.setPassword(values.password);
+                    user.setIsAuth(true);
 
-            navigate(SPORT_ROUTER);
+                    navigate(SPORT_ROUTER);
+                } else {
+                    setLoginError('Неверный логин или пароль');
+                }
+            } catch (error) {
+                console.error('Error logging in:', error);
+                setLoginError('Неверный логин или пароль');
+                setTimeout(() => {
+                    setLoginError('');
+                }, 3000);
+            }
+            
+            const responce = await getSport();
+            console.log(responce)
         },
-    });
+
+        });
 
     return (
 
@@ -56,8 +84,8 @@ const Login = observer(() => {
                         <div className={styles.login__item}>
                             <label>Email</label>  
                             <input
-                                type="email"
-                                placeholder="Email"
+                                type="text"
+                                placeholder="Логин"
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

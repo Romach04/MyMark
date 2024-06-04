@@ -4,10 +4,11 @@ import { observer } from 'mobx-react-lite';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+import axios from 'axios';
 
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { SPORT_ROUTER, LOGIN_ROUTER } from '../../../utils/const';
-
+import { registerUser } from "../../../components/http/userApi";
 import InputMask from 'react-input-mask';
 
 import {Context} from '../../../index'
@@ -17,10 +18,12 @@ import styles from './Registraion.module.css'
 const Registraion = observer(() => {
 
 
+    const [registrationMessage, setRegistrationMessage] = useState('');
+    const [registrationError, setRegistrationError] = useState('');
+
     const location = useLocation();
 
     const navigate = useNavigate();
-
 
     const { user } = useContext(Context);
 
@@ -46,17 +49,49 @@ const Registraion = observer(() => {
             .required('Обязательное поле'),
 
         }),
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
 
             let unmaskedPhoneNumber = values.phoneNumber.replace(/\D/g, '');
 
-            unmaskedPhoneNumber = Number(unmaskedPhoneNumber)
+            unmaskedPhoneNumber = Number(unmaskedPhoneNumber);
+
+            const userData = {
+                username: values.email,
+                password: values.password,
+                role: 'ADMIN,USER', 
+            };
+
+            try {
+                const response = await registerUser(userData);
+
+                setRegistrationMessage('Регистрация успешна!');
+
+                setTimeout(() => {
+                    setRegistrationMessage('');
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Error registering user:', error);
+                if(error.response.status === 400){
+                    setRegistrationError('Пользователь с таким логином уже существует');
+                } else {
+                    setRegistrationError('Не удалось зарегистрироваться. Попробуйте еще раз.');
+                }
+
+                setTimeout(() => {
+                    setRegistrationError('');
+                }, 3000);
+            }
+
+
+
+
 
             user.setPhoneNumber(unmaskedPhoneNumber);
             user.setEmail(values.email);
             user.setPassword(values.password);
 
-            navigate(SPORT_ROUTER);
+            // navigate(SPORT_ROUTER);
         },
     });
 
@@ -134,7 +169,13 @@ const Registraion = observer(() => {
                         </div>
                     </div>
                     
-                  
+        
+                    <div className={styles.info_message}>
+                        
+                        {registrationMessage && <div className={styles.success}>{registrationMessage}</div>}
+                        {registrationError && <div className={styles.error}>{registrationError}</div>}
+          
+                    </div>
 
                     <div className={styles.registraion__button}>
 

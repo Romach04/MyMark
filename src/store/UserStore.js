@@ -1,6 +1,13 @@
 import {makeAutoObservable, toJS} from 'mobx';
 
 export default class UserStore {
+
+    constructor() {
+        // this._isAuth = true;
+        // this._user = {}
+        makeAutoObservable(this)
+    }
+
     email = '';
     password = '';
     phoneNumber = null;
@@ -22,21 +29,16 @@ export default class UserStore {
 
     ]
 
-
-
-
-    setParticipantScores(participant){
-        this.articipant = participant;
-    }
-
-
-
     criteria = [
         {name: "Ловкость"},
         {name: "Сила"},
         {name: "Выносливость"}
     ]
 
+
+    setParticipantScores(participant){
+        this.articipant = participant;
+    }
 
     setSelectedSport(sport) {
         this.selectedSport = sport;
@@ -48,89 +50,26 @@ export default class UserStore {
     }
 
 
-
-
-
-
     printUserData() {
         console.log('Sport:', toJS(this.selectedSport));
 
     }
 
 
-
-
-    
-
-    
-    
-    // выбранный спорт
-    selectedLocation = ''; // выбранное место
-    selectedTime = '';  // Выбранное время
-    selectedOrganization = {}; 
-    selectedServices = [] // Выбранные услуги для организации
-
-    organizations = [
-        { organization_id: 0, subject_name: 'Агригатор_Мойка', city_name: 'Москва', street_name: 'Буянова', house_number: 23, organization_type: 1 },
-        { organization_id: 1, subject_name: 'МоскваСити_Мойка', city_name: 'Москва', street_name: 'Матросова', house_number: 21,organization_type: 1 },
-        { organization_id: 2, subject_name: 'РусАвто_Сервис', city_name: 'Самара', street_name: 'Буянова', house_number: 44, organization_type: 2},
-        { organization_id: 3, subject_name: 'СамараАвто_Сервис', city_name: 'Самара', street_name: 'Маяковская', house_number: 55, organization_type: 2 },
-    ];
-
-    carServices = [
-        { type_id: 0, type_code: 1,  type_name: 'Мойка кузова', price: 500, duration: 15 },
-        { type_id: 1, type_code: 1,  type_name: 'Мойка днища', price: 700, duration:  60},
-        { type_id: 2, type_code: 1,  type_name: 'Полировка', price: 1000, duration: 10 },
-        { type_id: 3, type_code: 2,  type_name: 'Ремонт двигателя', price: 5000, duration: 15 },
-        { type_id: 4, type_code: 2,  type_name: 'Замена масла', price: 1000, duration: 55 },
-        { type_id: 5, type_code: 2,  type_name: 'Подготовка к зиме', price: 1500, duration: 80 },
-    ];
-
-    
-   
-    constructor() {
-        // this._isAuth = true;
-        // this._user = {}
-        makeAutoObservable(this)
+    setIsAuth(bool) {
+        this._isAuth = bool
     }
 
-    setPhoneNumber(phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    setUser(user) {
+        this._ = user
     }
 
-    setEmail(email) {
-        this.email = email;
+    get isAuth(){
+        return this._isAuth
     }
-
-
-    setPassword(password){
-        this.password = password;
+    get user(){
+        return this._user
     }
-    
-
-    setSelectedLocation(location) {
-        this.selectedLocation = location;
-    }
-
-    setSelectedOrganization(organization) {
-        this.selectedOrganization = organization;
-    }
-
-
-    addSelectedServices(service) {
-        this.selectedServices.push(service);
-    }
-
-    removeSelectedServices(serviceId) {
-        this.selectedServices = this.selectedServices.filter(service => service.type_id !== serviceId);
-    }
-
-
-    setSelectedTime(time) {
-        this.selectedTime = time;
-    }
-
-    ////////////////////////////////////
 
 
 
@@ -149,26 +88,16 @@ export default class UserStore {
 
 
 
-    //////////////////////
 
 
-    setIsAuth(bool) {
-        this._isAuth = bool
-    }
-
-    setUser(user) {
-        this._ = user
-    }
-
-    get isAuth(){
-        return this._isAuth
-    }
-    get user(){
-        return this._user
-    }
 
     
 }
+
+
+
+
+
 
 
 

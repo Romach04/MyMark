@@ -20,7 +20,7 @@ const Navbar = () => {
 
         <div className={styles.container}>
             
-                {/* <NavLink style={{color:'white'}} onClick={navigate(SPORT_ROUTER)}>Моя оценка</NavLink> */}
+                {/* <NavLink style={{color:'white'}} onClick={navigate(SPORT_ROUTER)}>Моя оценка</NavLink>  */}
                 <Image  width={30} height={30} className='me-auto ms-2' src={logo}/>
                 <Button
                         variant='outline-light'

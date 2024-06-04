@@ -85,16 +85,20 @@ h2{
     
 }
 
-
-.registraion__checkbox{
+.info_message{
+    margin-top: 20px;
+    justify-content: center;
     display: flex;
-    align-items:center;
 }
 
-.registraion__checkbox input{
-    width: 30px;
-    height: 16px;
+.success{
+    color:green;
 }
+
+.error{
+    color: red;
+}
+
 .login_link{
     display: flex;
     justify-content: center;
