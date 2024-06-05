@@ -3,40 +3,62 @@ import { observer } from 'mobx-react-lite';
 import {useNavigate, useParams} from 'react-router-dom';
 import { Context } from '../../../index';
 import styles from './ParticantItem.module.css';
+import Spinner from 'react-bootstrap/Spinner';
 
 import Button from "../../../components/Button";
+import { getParticipantById } from "../../../components/http/particantApi";
 
 const ParticantItem = observer(() => {
 
 
     const { user } = useContext(Context);
+    const {particant} = useContext(Context);
+
     const navigate = useNavigate();
     const { id } = useParams();
 
     const participant = user.selectedParticipants.find(p => p.id === parseInt(id));
 
-    const [avarageCount, SetAvarageCount] = useState(0);
-
     const [scores, setScores] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
+    const [avarageCount, SetAvarageCount] = useState(0);
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchParticipantById = async (id) => {
+            try {
+                const data = await getParticipantById(id);
+
+                particant.setParticipant(data)
+            } catch (error) {
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchParticipantById(id)
+  
+    }, [id, particant])
+
 
     // Инициализация состояния scores
     useEffect(() => {
-        if (participant) {
+        if (particant.participant) {
             const initialScores = {};
-            user.criteria.forEach(criterion => {
-                initialScores[criterion.name] = '';
+            particant.participant.criteriaNames.forEach(criterion => {
+                initialScores[criterion] = '';  // Инициализируем оценки пустыми значениями
             });
             setScores(initialScores);
         }
-    }, [participant, user.criteria]);
-
+    }, [particant.participant]);
     
     // Валидация формы
     useEffect(() => {
-        const allFilled = user.criteria.every(criterion => scores[criterion.name] !== '');
+        const allFilled = particant.participant && particant.participant.criteriaNames.every(criterion => scores[criterion] !== '');
         setIsFormValid(allFilled);
-    }, [scores, user.criteria]);
+    }, [scores, particant.participant]);
 
     // Обработка изменения значений критериев
     const handleScoreChange = (criterion, value) => {
@@ -73,28 +95,35 @@ const ParticantItem = observer(() => {
     }
    
 
-  
+    if (loading) {
+
+        return (
+            <div className={styles.spinner}>
+                <Spinner animation="border" />
+            </div>
+        )   
+    }
 
 
-    if (!participant) {
+    if (!particant.participant) {
         return <div>Участник не найден</div>
     }
 
     return (
         <div className={styles.participant__container}>
-            <h2>{participant.surname} {participant.name} {participant.middleName}</h2>
-            <h3>Вид спорта: {participant.sportEntity.sportName}</h3>
+            <h2>{particant.participant.surname} {particant.participant.name} {particant.participant.middleName}</h2>
+            <h3>Вид спорта: {particant.selectedSport.sportName}</h3>
 
             <form className={styles.criteria__form} onSubmit={handleSubmit}>
-                {user.criteria.map((criterion, index) => (
+                {particant.participant.criteriaNames.map((criterion, index) => (
                     <div key={index} className={styles.criteria__item}>
-                        <label>{criterion.name}</label>
+                        <label>{criterion}</label>
                         <input
                             min="0"
                             type="number"
                             step="0.1"
-                            value={scores[criterion.name] || ''}
-                            onChange={(e) => handleScoreChange(criterion.name, e.target.value)}
+                            value={scores[criterion] || ''}
+                            onChange={(e) => handleScoreChange(criterion, e.target.value)}
                             onBlur={() => handleBlur()} 
                         />
                     </div>
