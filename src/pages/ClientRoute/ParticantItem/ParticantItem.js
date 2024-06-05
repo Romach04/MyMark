@@ -6,77 +6,115 @@ import styles from './ParticantItem.module.css';
 import Spinner from 'react-bootstrap/Spinner';
 
 import Button from "../../../components/Button";
-import { getParticipantById } from "../../../components/http/particantApi";
+import { getParticipantById, getScores, saveScore } from "../../../components/http/particantApi";
 
 const ParticantItem = observer(() => {
 
-
-    const { user } = useContext(Context);
     const {particant} = useContext(Context);
 
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const participant = user.selectedParticipants.find(p => p.id === parseInt(id));
 
     const [scores, setScores] = useState({});
+
+    const [inputScores, setInputScores] = useState({});
+
     const [isFormValid, setIsFormValid] = useState(false);
     const [avarageCount, SetAvarageCount] = useState(0);
 
     const [loading, setLoading] = useState(true);
 
+    const [disabledInputs, setDisabledInputs] = useState(false);
+
     useEffect(() => {
-        const fetchParticipantById = async (id) => {
+        const fetchParticipantData  = async (id) => {
             try {
                 const data = await getParticipantById(id);
+                const scoresData = await getScores();
 
-                particant.setParticipant(data)
+                particant.setParticipantItem(data);
+                particant.setScores(scoresData);
+
+
             } catch (error) {
-
+                console.error("Failed to fetch participant or scores:", error)
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchParticipantById(id)
+        fetchParticipantData(id)
   
     }, [id, particant])
 
 
     // Инициализация состояния scores
     useEffect(() => {
-        if (particant.participant) {
+        if (particant._particantItem) {
             const initialScores = {};
-            particant.participant.criteriaNames.forEach(criterion => {
-                initialScores[criterion] = '';  // Инициализируем оценки пустыми значениями
+            particant._particantItem.criteriaNames.forEach(criterion => {
+
+                const scoreObj = particant.scores.find(
+                    score => score.participantEntity?.id === parseInt(id) && score.criteriaEntity?.criterionName === criterion
+                );
+                initialScores[criterion] = scoreObj? scoreObj.score : 0;  // // Устанавливаем оценку или 0, если оценки нет
             });
             setScores(initialScores);
         }
-    }, [particant.participant]);
+    }, [particant._particantItem, particant.scores, id]);
     
+
     // Валидация формы
     useEffect(() => {
-        const allFilled = particant.participant && particant.participant.criteriaNames.every(criterion => scores[criterion] !== '');
+        const allFilled = particant._particantItem && particant._particantItem.criteriaNames.every(criterion => inputScores[criterion] !== '');
         setIsFormValid(allFilled);
-    }, [scores, particant.participant]);
+    }, [inputScores, particant._particantItem]);
+
 
     // Обработка изменения значений критериев
     const handleScoreChange = (criterion, value) => {
-        setScores(prevScores => ({
+        setInputScores(prevScores => ({
             ...prevScores,
             [criterion]: value
         }));
+
+
+        setDisabledInputs(true);
     };
 
     
     // Обработка отправки формы
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        
+    const handleSubmit = async (e) => {
 
-        navigate(-1); 
+        e.preventDefault();
+
+        try {
+
+
+            const promises = particant._particantItem.criteriaNames.map(async (criterion) => {
+                
+                const score = parseFloat(inputScores[criterion]);
+       
+                if (!isNaN(score)) {
+                    console.log(parseInt(id), criterion, score)
+                    await saveScore({
+                        participantId: parseInt(id),
+                        criterionName: criterion,
+                        score: score
+                    });
+                }
+            });
+
+
+            await Promise.all(promises);
+            // navigate(-1);
+        } catch (error) {
+            console.error("Failed to save scores:", error);
+        }
+     
     };
+
 
 
     const handleBlur = () => {
@@ -105,26 +143,28 @@ const ParticantItem = observer(() => {
     }
 
 
-    if (!particant.participant) {
+    if (!particant._particantItem) {
         return <div>Участник не найден</div>
     }
 
     return (
         <div className={styles.participant__container}>
-            <h2>{particant.participant.surname} {particant.participant.name} {particant.participant.middleName}</h2>
-            <h3>Вид спорта: {particant.selectedSport.sportName}</h3>
+            <h2>{particant._particantItem.surname} {particant._particantItem.name} {particant._particantItem.middleName}</h2>
+            <h3>Вид спорта: {particant.selectedSport?.sportName}</h3>
 
             <form className={styles.criteria__form} onSubmit={handleSubmit}>
-                {particant.participant.criteriaNames.map((criterion, index) => (
+                {particant._particantItem.criteriaNames.map((criterion, index) => (
                     <div key={index} className={styles.criteria__item}>
                         <label>{criterion}</label>
+                        <span>Текущая оценка: {scores[criterion]}</span>
                         <input
                             min="0"
                             type="number"
                             step="0.1"
-                            value={scores[criterion] || ''}
+                            value={inputScores[criterion] || ''}
                             onChange={(e) => handleScoreChange(criterion, e.target.value)}
-                            onBlur={() => handleBlur()} 
+                            onBlur={() => handleBlur()}
+                            disabled={disabledInputs && inputScores[criterion] === ''}
                         />
                     </div>
                 ))}
@@ -134,7 +174,7 @@ const ParticantItem = observer(() => {
                 </div> 
     
 
-                <Button text="Оценить" type="submit" className={styles.submit__button} disabled={!isFormValid} />
+                <Button text={"Оценить"} type="submit" onClick={handleSubmit} className={styles.submit__button} disabled={!isFormValid} />
                 
             </form>
 

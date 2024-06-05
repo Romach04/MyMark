@@ -38,4 +38,31 @@ export const getParticipantById = async (id) => {
 }
 
 
+export const getScores = async () => {
+    try{
+        
+        const response = await api.get('/score');
+        console.log(response.data);
+        return response.data
+
+    } catch (error) {
+        console.error('Error get score:', error);
+        throw error;
+    }
+}
+
+
+export const saveScore = async (scoreData) => {
+    try{
+        
+        const response = await api.post('/score/updateScore', scoreData);
+        console.log(response.data);
+        return response.data
+
+    } catch (error) {
+        console.error('Error get score:', error);
+        throw error;
+    }
+}
+
 

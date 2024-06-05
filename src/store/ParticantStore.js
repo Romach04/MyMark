@@ -8,17 +8,15 @@ export default class ParticantStore {
     _participants = [];
     _selectedParticipant = null;
 
-
-    participant = null;
-
-    // _particantItem = null;
+    _particantItem = null;
+    _scores = [];
     
     constructor() {
 
         makeAutoObservable(this)
     }
 
-
+    //
     setSports(sports) {
         this._sports = sports;
     }
@@ -27,6 +25,7 @@ export default class ParticantStore {
         this._selectedSport = sport;
     }
 
+    //
     setParticipants(participants) {
         this._participants = participants;
     }
@@ -35,16 +34,15 @@ export default class ParticantStore {
         this._selectedParticipant = participant;
     }
 
+    //
 
-    setParticipant(participant) {
-        this.participant = participant;
+    setParticipantItem(participant) {
+        this._particantItem = participant
     }
 
-
-
-    // setParticipantItem(participant) {
-    //     this._particantItem = participant
-    // }
+    setScores(scores) {
+        this._scores = scores;
+    }
 
 
     get sports() {
@@ -55,6 +53,7 @@ export default class ParticantStore {
         return this._selectedSport;
     }
 
+    //
     get participants() {
         return this._participants;
     }
@@ -64,10 +63,16 @@ export default class ParticantStore {
     }
 
 
+    //
     get participantItem () {
         return this._particantItem;
     }
 
+
+    get scores() {
+        return this._scores;
+    }
+    
     printUserData() {
 
         console.log('SportSelected:', this._selectedSport);
