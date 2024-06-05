@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
+import Spinner from 'react-bootstrap/Spinner';
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { PARTICANT_ROUTER } from '../../../utils/const';
@@ -15,21 +16,33 @@ const SportSelection = observer(() => {
 
     const {particant} = useContext(Context);
 
-    useEffect(() => {
-        getSport().then(data => particant.setTypeSport(data))
-                  .then(console.log(particant._selectedSport))
-    }, [particant])
+    const [loading, setLoading] = useState(true);
 
-    const [selectedSport, setSelectedSport] = useState(null);
+    useEffect(() => {
+        const fetchSports = async () => {
+            try {
+                const data = await getSport();
+                particant.setSports(data);
+                console.log(particant._sports)
+            } catch (error) {
+                console.error('Error fetching sports:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchSports();
+    }, [particant]);
+
+    // const [selectedSport, setSelectedSport] = useState(null);
 
 
 
 
     const handleNext = () => {
-        user.setSelectedSport(selectedSport);
-        
-        // user.printUserData();
+        particant.setSelectedSport(particant.selectedSport);
 
+        particant.printUserData();
         navigate(PARTICANT_ROUTER);
     };
 
@@ -38,40 +51,52 @@ const SportSelection = observer(() => {
         handleNext();
     };
 
-    // async function responce () {
-    //     const data = await getSport();
-    //     console.log(data)
-    // }
+    const handleSportSelect = (sport) => {
+        particant.setSelectedSport(sport);
+    };
 
-    // responce();
+    if (loading) {
+        return (
+
+        <div className="spinner">
+            <Spinner animation="border"/>
+        </div>
+
+        )
+    }
+
 
 
     return (
         <div className={styles.main__container}>
-            <form  className={styles.services_form} onSubmit={handleSubmit}>
+            <form  className={styles.sport_form} onSubmit={handleSubmit}>
                 <div>
                     <h2>Виды спорта</h2>
                 </div>
-                <div className={styles.services}>
-                    {user.typeSport.map(item => (
+                <div className={styles.sport__card}>
+                    {particant.sports.map((item, index)=> (
                         
-                        <div key={item.id} className={styles.service__item}>
+                        <div key={index} className={styles.sport__item}>
                             <input
-                                className={styles.services__checkbox}
+                                className={styles.item__checkbox}
                                 type="checkbox"
-                                id={item.id}
-                                checked={selectedSport?.id === item.id}
-                                onChange={() => setSelectedSport(item)}
+                                id={index}
+                                checked={particant.selectedSport?.sportName === item.sportName}
+                                onChange={() => handleSportSelect(item)}
                             />
-                            <label htmlFor={item.id}>{item.sport_name}</label>
+                            <label htmlFor={index}>{item.sportName}</label>
                         </div>
                         
                     ))}
 
                 </div>
                 <div className={styles.button__container}>
-                    <Button text={"Выбрать"} onClick={handleSubmit} disabled={!selectedSport} className={styles.next__button}>
-                        
+                    <Button text={"Выбрать"}
+                    onClick={handleSubmit}
+                    disabled={!particant.selectedSport}
+                    className={styles.next__button}
+                    >
+        
                     </Button>
                 </div>
 

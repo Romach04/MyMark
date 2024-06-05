@@ -14,3 +14,16 @@ export const getSport = async () => {
 }
 
 
+export const getParticipants = async () => {
+    try {
+        const response = await api.get('/participant');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting participants:', error);
+        throw error;
+    }
+};
+
+
+

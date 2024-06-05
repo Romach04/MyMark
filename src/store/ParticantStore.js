@@ -4,6 +4,8 @@ export default class ParticantStore {
     
     _sports = [];
     _selectedSport = null;
+    _participants = [];
+    _selectedParticipant = null;
     
     constructor() {
 
@@ -19,12 +21,36 @@ export default class ParticantStore {
         this._selectedSport = sport;
     }
 
+    setParticipants(participants) {
+        this._participants = participants;
+    }
+
+    setSelectedParticipant(participant) {
+        this._selectedParticipant = participant;
+    }
+
+
+
     get sports() {
         return this._sports;
     }
 
     get selectedSport() {
         return this._selectedSport;
+    }
+
+    get participants() {
+        return this._participants;
+    }
+
+    get selectedParticipant() {
+        return this._selectedParticipant;
+    }
+
+    printUserData() {
+
+        console.log('SportSelected:', this._selectedSport);
+
     }
 
     
