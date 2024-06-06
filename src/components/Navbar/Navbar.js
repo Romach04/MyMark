@@ -3,22 +3,20 @@ import React, {useContext} from 'react';
 import styles from "./Navbar.module.css"
 import { Context } from '../../index';
 
-import svgImage from '../../assets/svg/exit.svg'
 import Nav from 'react-bootstrap/Nav';
 
-import { useNavigate, useLocation, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.ico';
 
-import { ADMIN_ROUTER, SPORT_ROUTER, LOGIN_ROUTER, REGISTRATION_ROUTER } from '../../utils/const';
+import { ADMIN_ROUTER, LOGIN_ROUTER } from '../../utils/const';
 
 import {logOut} from '../http/userApi';
 
-import { Button, Container, Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 
 const Navbar = () => {
 
     const { user } = useContext(Context);
-    const location = useLocation();
     const navigate = useNavigate();
 
 

@@ -56,7 +56,12 @@ const CreateScore = ({ show, onHide }) => {
                 onHide();
             }, 2000); // Закрыть окно через 2 секунды после успешного добавления
         } catch (error) {
-            console.error('Error saving score:', error);
+            if (error.response && error.response.status === 403) {
+                alert('Недостаточно прав для выполнения этого действия');
+                onHide();
+            } else {
+                console.error('Error adding participant:', error);
+          }
         }
     };
 

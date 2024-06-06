@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Context } from '../../../index';
 import styles from './Admin.module.css';
 import CreateSport from "../../../components/modals/CreateSport";
 import CreatePatricant from "../../../components/modals/CreatePatricant";
@@ -13,7 +12,6 @@ import { Button, Container } from "react-bootstrap";
 
 const Admin = observer(() => {
 
-    const { particant } = useContext(Context);
 
     const [sportVis,  setSportVis] = useState(false)
     const [particantVis,  setParticantVis] = useState(false)

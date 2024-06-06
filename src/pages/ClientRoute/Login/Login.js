@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { SPORT_ROUTER, REGISTRATION_ROUTER } from '../../../utils/const';
 
 import Button from 'react-bootstrap/Button';

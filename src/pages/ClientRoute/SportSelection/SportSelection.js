@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
 import Spinner from 'react-bootstrap/Spinner';
-// import Button from "../../../components/Button";
+
 import { useNavigate } from "react-router-dom";
 import { PARTICANT_ROUTER } from '../../../utils/const';
 import { getSport } from "../../../components/http/particantApi";
@@ -14,7 +14,6 @@ const SportSelection = observer(() => {
 
     const navigate = useNavigate();
 
-    const { user } = useContext(Context);
 
     const {particant} = useContext(Context);
 

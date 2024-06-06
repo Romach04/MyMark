@@ -1,14 +1,13 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import { observer } from 'mobx-react-lite';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { LOGIN_ROUTER } from '../../../utils/const';
 import { registerUser } from "../../../components/http/userApi";
 
-import {Context} from '../../../index'
 
 import styles from './Registraion.module.css'
 
@@ -18,11 +17,6 @@ const Registraion = observer(() => {
     const [registrationMessage, setRegistrationMessage] = useState('');
     const [registrationError, setRegistrationError] = useState('');
 
-    const location = useLocation();
-
-    const navigate = useNavigate();
-
-    const { user } = useContext(Context);
 
     const formik = useFormik({
 

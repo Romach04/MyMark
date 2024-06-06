@@ -56,8 +56,9 @@ const CreatePatricant = ({show, onHide}) => {
         }, 2000); 
 
       } catch (error) {
-          if (error.response && error.response.status === 401) {
+          if (error.response && error.response.status === 403) {
               alert('Недостаточно прав для выполнения этого действия');
+              onHide();
           } else {
               console.error('Error adding participant:', error);
         }
