@@ -57,7 +57,7 @@ export const getCriteria = async () => {
     try{
         
         const response = await api.get('/criteria');
-        console.log(response.data);
+        // console.log(response.data);
         return response.data
 
     } catch (error) {

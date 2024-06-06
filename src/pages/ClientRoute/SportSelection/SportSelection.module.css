@@ -1,4 +1,4 @@
-.main__container{
+.main__container {
     box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
     background-color: white;
     min-height: 75vh;
@@ -6,17 +6,10 @@
     flex-direction: column;
     align-items: center;
     border-radius: 6%;
+    padding: 20px; /* Добавьте отступ для удобства */
 }
 
-/* .service__item input {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    border-radius: 50%;
-} */
-
-.item__checkbox{
-
+.item__checkbox {
     width: 1.3em;
     height: 1.3em;
     background-color: white;
@@ -28,69 +21,62 @@
     outline: none;
     cursor: pointer;
     margin-left: 10px;
-    
-
-
 }
 
-.item__checkbox:checked{
+.item__checkbox:checked {
     background-color: #95add8;
 }
 
-.sport__item{
-    width: 100%;
+.sport__item {
+    width: auto; /* Установите ширину автоматически, чтобы не занимать всю ширину контейнера */
     height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-
-.sport__item  label {
-    margin-left: 20px ;
+.sport__item label {
+    margin-left: 20px;
     font-size: 25px;
     font-weight: 500;
 }
 
-h2{
-    font-size: 37px
+h2 {
+    font-size: 37px;
 }
 
-.sport__card{
-
-    width: 250px;
-    height: 200px;
+.sport__card {
+    width: 100%; /* Сделайте контейнер шириной 100% */
+    max-height: 200px; /* Установите максимальную высоту */
     margin-top: 5%;
     gap: 30px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
+    flex-wrap: wrap; /* Добавьте flex-wrap для переноса элементов */
+    justify-content: center; /* Центрируйте элементы по горизонтали */
+    align-items: center; /* Центрируйте элементы по вертикали */
+    overflow-y: auto; /* Добавьте прокрутку по вертикали */
 }
 
-.sport_form{
+.sport_form {
+    width: 100%; /* Сделайте форму шириной 100% */
     gap: 30px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center; /* Центрируйте форму по горизонтали */
     align-items: center;
     flex-direction: column;
-
 }
 
-.button__container{
-    margin-top: 100px;
+.button__container {
+    margin-top: 20px; /* Уменьшите отступ сверху */
 }
 
-
-.next__button{
-    margin-top: 20px;
+.next__button {
     font-size: 15px;
     width: 245px;
-    height: 48px; 
-   
+    height: 48px;
 }
 
-.spinner{
+.spinner {
     position: absolute;
     top: 50%;
     left: 50%;

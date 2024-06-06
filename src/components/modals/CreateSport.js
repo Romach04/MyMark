@@ -7,12 +7,22 @@ const CreateSport = ({show, onHide}) => {
 
     const [value, setValue] = useState('');
 
+    const [message, setMessage] = useState('');
+
     const addSport = async () => {
       try {
           await saveSport({ sportName: value });
-          alert('Добавлено успешно');
+          
           setValue('');
-          onHide();
+
+          setMessage('Оценка успешно добавлена');
+
+            setTimeout(() => {
+                setMessage('');
+                onHide();
+            }, 2000);
+            
+          
       } catch (error) {
           if (error.response && error.response.status === 401) {
               alert('Недостаточно прав для выполнения этого действия');
@@ -37,6 +47,7 @@ const CreateSport = ({show, onHide}) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+      {message && <div className="alert alert-success">{message}</div>}
         <Form>
             <Form.Control
             value={value}

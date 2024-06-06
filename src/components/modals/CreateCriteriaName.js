@@ -13,6 +13,8 @@ const CreateCriteriaName = ({show, onHide}) => {
     const [criteria, setCriteria] = useState('');
     const [sports, setSports] = useState([]);
     const [selectedSport, setSelectedSport] = useState(null);
+    const [message, setMessage] = useState('');
+
       
     
 
@@ -38,13 +40,18 @@ const CreateCriteriaName = ({show, onHide}) => {
       
       console.log(CriteriaData);
       try {
-          await saveCriteria(CriteriaData);
 
-          setCriteria('')
-          setSelectedSport(null);
+        await saveCriteria(CriteriaData);
 
-          alert('Добавлен успешно');
-          onHide();
+        setCriteria('')
+        setSelectedSport(null);
+
+        setMessage('Оценка успешно добавлена');
+
+        setTimeout(() => {
+            setMessage('');
+            onHide();
+        }, 2000); 
       } catch (error) {
           if (error.response && error.response.status === 401) {
               alert('Недостаточно прав для выполнения этого действия');
@@ -71,6 +78,7 @@ const CreateCriteriaName = ({show, onHide}) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {message && <div className="alert alert-success">{message}</div>}
 
         <Form>
           <Form.Control
@@ -80,7 +88,7 @@ const CreateCriteriaName = ({show, onHide}) => {
             />
         </Form>
 
-          <Form >
+        <Form >
             <Form.Control
                 className="mt-3"
                 as="select"
@@ -98,7 +106,7 @@ const CreateCriteriaName = ({show, onHide}) => {
                     </option>
                 ))}
             </Form.Control>
-            </Form>
+        </Form>
 
       </Modal.Body>
       <Modal.Footer>

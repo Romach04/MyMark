@@ -7,7 +7,7 @@ import CreatePatricant from "../../../components/modals/CreatePatricant";
 
 import CreateCriteriaName from "../../../components/modals/CreateCriteriaName";
 
-
+import CreateScore from "../../../components/modals/CreateScore";
 
 import { Button, Container } from "react-bootstrap";
 
@@ -18,6 +18,7 @@ const Admin = observer(() => {
     const [sportVis,  setSportVis] = useState(false)
     const [particantVis,  setParticantVis] = useState(false)
     const [criteriaVis,  setCriteriaVis] = useState(false)
+    const [scoreVis,  setScoreVis] = useState(false)
 
     return (
         <div className={styles.container}>
@@ -40,12 +41,20 @@ const Admin = observer(() => {
                     className="mt-2"
                     >Добавить критерий
                 </Button>
+                <Button 
+                    onClick={() => setScoreVis(true)}
+                    variant="outline-secondary" 
+                    className="mt-2"
+                    >Добавить оценку
+                </Button>
 
                 <CreateSport show={sportVis} onHide={() => setSportVis(false)}/>
                 
                 <CreatePatricant show={particantVis} onHide={() => setParticantVis(false)}/>
 
-                <CreateCriteriaName show={criteriaVis} onHide={() => setCriteriaVis(false)}/>
+                <CreateCriteriaName show={criteriaVis}  onHide={() => setCriteriaVis(false)}/>
+
+                <CreateScore show={scoreVis} onHide={() => setScoreVis(false)}/>
 
             </Container>
         </div>

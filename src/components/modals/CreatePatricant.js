@@ -13,6 +13,8 @@ const CreatePatricant = ({show, onHide}) => {
     const [middle, setMiddle] = useState('');
     const [sports, setSports] = useState([]);
     const [selectedSport, setSelectedSport] = useState(null);
+    const [message, setMessage] = useState('');
+
       
     
 
@@ -40,13 +42,19 @@ const CreatePatricant = ({show, onHide}) => {
       
       console.log(participantData);
       try {
-          await saveParticipant(participantData);
-          setName('');
-          setSurname('');
-          setMiddle('');
-          setSelectedSport(null);
-          alert('Добавлен успешно');
-          onHide();
+        await saveParticipant(participantData);
+        setName('');
+        setSurname('');
+        setMiddle('');
+        setSelectedSport(null);
+
+        setMessage('Оценка успешно добавлена');
+
+        setTimeout(() => {
+            setMessage('');
+            onHide();
+        }, 2000); 
+
       } catch (error) {
           if (error.response && error.response.status === 401) {
               alert('Недостаточно прав для выполнения этого действия');
@@ -73,6 +81,7 @@ const CreatePatricant = ({show, onHide}) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {message && <div className="alert alert-success">{message}</div>}
 
         <Form>
           <Form.Control

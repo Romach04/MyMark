@@ -40,3 +40,15 @@ export const saveCriteria = async (criteria) => {
 };
 
 
+export const saveScoreAdmin = async (score) => {
+    try {
+        const response = await api.post(`score/save`, score);
+        console.log(response);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error saving participant:', error);
+        throw error;
+    }
+};
+
