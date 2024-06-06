@@ -2,11 +2,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {Context} from '../../../index'
 import Spinner from 'react-bootstrap/Spinner';
-import Button from "../../../components/Button";
+// import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { PARTICANT_ROUTER } from '../../../utils/const';
 import { getSport } from "../../../components/http/particantApi";
 import styles from './SportSelection.module.css';
+
+import Button from 'react-bootstrap/Button';
 
 const SportSelection = observer(() => {
 
@@ -22,8 +24,13 @@ const SportSelection = observer(() => {
         const fetchSports = async () => {
             try {
                 const data = await getSport();
-                particant.setSports(data);
-                console.log(particant._sports)
+
+                if (Array.isArray(data)) {
+                    particant.setSports(data);
+                } else {
+                    particant.setSports([]);
+                }
+
             } catch (error) {
                 console.error('Error fetching sports:', error);
             } finally {
@@ -91,11 +98,13 @@ const SportSelection = observer(() => {
 
                 </div>
                 <div className={styles.button__container}>
-                    <Button text={"Выбрать"}
+                    <Button 
+                    variant="outline-secondary"
                     onClick={handleSubmit}
                     disabled={!particant.selectedSport}
                     className={styles.next__button}
                     >
+                    Выбрать
         
                     </Button>
                 </div>

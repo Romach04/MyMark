@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { SPORT_ROUTER, REGISTRATION_ROUTER } from '../../../utils/const';
 
+import Button from 'react-bootstrap/Button';
+
 
 import {Context} from '../../../index'
 
@@ -139,9 +141,9 @@ const Login = observer(() => {
 
                     <div className={styles.login__button}>
 
-                        <button type="submit" disabled={!formik.isValid}>
+                        <Button type="submit"  variant="primary" disabled={!formik.isValid}>
                                 Войти
-                        </button>
+                        </Button>
                     </div>
 
                 </form>

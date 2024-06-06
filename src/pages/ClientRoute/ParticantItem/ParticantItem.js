@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import {useNavigate, useParams} from 'react-router-dom';
 import { Context } from '../../../index';
+import { Card, Button, Form } from 'react-bootstrap';
 import styles from './ParticantItem.module.css';
 import Spinner from 'react-bootstrap/Spinner';
 
-import Button from "../../../components/Button";
 import { getParticipantById, getScores, saveScore } from "../../../components/http/particantApi";
 
 const ParticantItem = observer(() => {
@@ -26,8 +26,20 @@ const ParticantItem = observer(() => {
                 const data = await getParticipantById(id);
                 const scoresData = await getScores();
 
-                particant.setParticipantItem(data);
-                particant.setScores(scoresData);
+                console.log(data);
+                console.log(scoresData);
+
+                if (Array.isArray(data)) {
+                    particant.setParticipants(data);
+                } else if (data && typeof data === 'object') {
+                    particant.setParticipantItem(data);
+                } else {
+                    particant.setParticipantItem(null);
+                }
+
+
+                if (Array.isArray(scoresData)) {
+                    particant.setScores(scoresData);
 
                 // Инициализируем оценки и считаем среднее значение только при загрузке данных
                 const initialScores = {};
@@ -39,7 +51,10 @@ const ParticantItem = observer(() => {
                 });
                 setScores(initialScores);
                 countAverage(initialScores);
-
+                } else {
+                    particant.setScores([]);
+                }
+                
             } catch (error) {
                 console.error("Failed to fetch participant or scores:", error);
             } finally {
@@ -114,30 +129,37 @@ const ParticantItem = observer(() => {
     return (
         <div className={styles.participant__container}>
             <h2>{particant._particantItem.surname} {particant._particantItem.name} {particant._particantItem.middleName}</h2>
-            <h3>Вид спорта: {particant.selectedSport?.sportName}</h3>
+            <p>Вид спорта: {particant.selectedSport?.sportName}</p>
 
-            <form className={styles.criteria__form} onSubmit={handleSubmit}>
+            <Form className={styles.criteria__form} onSubmit={handleSubmit}>
                 {particant._particantItem.criteriaNames.map((criterion, index) => (
-                    <div key={index} className={styles.criteria__item}>
-                        <label>{criterion}</label>
-                        <span>Текущая оценка: {scores[criterion]}</span>
-                        <input
-                            min="0"
-                            type="number"
-                            step="0.1"
-                            value={inputScores[criterion] || ''}
-                            onChange={(e) => handleScoreChange(criterion, e.target.value)}
+                    <Card key={index} bg="light" text="dark" className="mb-2" style={{ width: '100%' }}>
+                        <Card.Header>{criterion}</Card.Header>
+                        <Card.Body>
 
-                        />
-                    </div>
+                            <div className={styles.criteria__item}>
+                            <span>Текущая оценка: {scores[criterion]}</span>
+                            <Form.Control
+                                type="number"
+                                min="0"
+                                step="0.1"
+                                value={inputScores[criterion] || ''}
+                                onChange={(e) => handleScoreChange(criterion, e.target.value)}
+                                style={{marginTop: "15px"}}
+                            />
+                            </div>
+                        </Card.Body>
+                    </Card>
                 ))}
 
-                <div className={styles.average__score}>
+                    <div className={styles.average__score}>
                     <p>Средний балл: {averageCount.toFixed(2)}</p>
-                </div>
+                    </div>
 
-                <Button text={"Оценить"} type="submit" className={styles.submit__button} disabled={!isFormValid || loading} />
-            </form>
+                <Button variant="primary" type="submit" className={styles.submit__button} disabled={!isFormValid || loading}>
+                    Оценить
+                </Button>
+            </Form>
         </div>
     );
 });

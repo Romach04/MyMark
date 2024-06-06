@@ -4,7 +4,7 @@ import api from './api';
 export const getSport = async () => {
     try {
         const response = await api.get(`/sport`);
-        console.log(response.data);
+        // console.log(response.data);
 
         return response.data;
     } catch (error) {
@@ -17,7 +17,7 @@ export const getSport = async () => {
 export const getParticipants = async () => {
     try {
         const response = await api.get('/participant');
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error getting participants:', error);
@@ -28,7 +28,7 @@ export const getParticipants = async () => {
 export const getParticipantById = async (id) => {
     try {
         const response = await api.get('/participant/' + id);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error get participant:', error);
@@ -42,7 +42,7 @@ export const getScores = async () => {
     try{
         
         const response = await api.get('/score');
-        console.log(response.data);
+        // console.log(response.data);
         return response.data
 
     } catch (error) {
@@ -52,11 +52,25 @@ export const getScores = async () => {
 }
 
 
+
+export const getCriteria = async () => {
+    try{
+        
+        const response = await api.get('/criteria');
+        console.log(response.data);
+        return response.data
+
+    } catch (error) {
+        console.error('Error get score:', error);
+        throw error;
+    }
+}
+
 export const saveScore = async (scoreData) => {
     try{
         
         const response = await api.post('/score/updateScore', scoreData);
-        console.log(response.data);
+        //console.log(response.data);
         return response.data
 
     } catch (error) {

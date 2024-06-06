@@ -1,4 +1,4 @@
-import MainPage from "./pages/MainPage/MainPage";
+
 import Registraion from './pages/ClientRoute/Registration/Registraion';
 import SportSelection from './pages/ClientRoute/SportSelection/SportSelection';
 
@@ -9,7 +9,7 @@ import Admin from "./pages/ClientRoute/Admin/Admin";
 
 import Login from "./pages/ClientRoute/Login/Login";
 
-import { MAINPAGE_ROUTER, REGISTRATION_ROUTER, LOGIN_ROUTER, SPORT_ROUTER, PARTICANT_ROUTER, ADMIN_ROUTER } from "./utils/const";
+import {REGISTRATION_ROUTER, LOGIN_ROUTER, SPORT_ROUTER, PARTICANT_ROUTER, ADMIN_ROUTER } from "./utils/const";
 
 export const authRoutes = [
     // {
@@ -20,10 +20,7 @@ export const authRoutes = [
 ]
 
 export const publicRoutes = [
-    {
-        path:MAINPAGE_ROUTER,
-        Component: MainPage
-    },
+
     {
         path: REGISTRATION_ROUTER,
         Component: Registraion

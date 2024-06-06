@@ -24,7 +24,14 @@ const ParticantList = observer(() => {
         const fetchParticipants = async () => {
             try {
                 const data = await getParticipants();
-                particant.setParticipants(data);
+
+                if (Array.isArray(data)) {
+                    particant.setParticipants(data);
+                } else {
+                    particant.setParticipants([]);
+                }
+
+                // particant.setParticipants(data);
             } catch (error) {
                 console.error('Error fetching participants:', error);
             } finally {

@@ -1,26 +1,32 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../../index';
 import styles from './Admin.module.css';
-import CreateСriteria from "../../../components/modals/CreateСriteria";
+import CreateSport from "../../../components/modals/CreateSport";
 import CreatePatricant from "../../../components/modals/CreatePatricant";
+
+import CreateCriteriaName from "../../../components/modals/CreateCriteriaName";
+
+
+
 import { Button, Container } from "react-bootstrap";
 
 const Admin = observer(() => {
 
-    const { user } = useContext(Context);
+    const { particant } = useContext(Context);
 
-    const [criteriaVis,  setCriteriaVis] = useState(false)
+    const [sportVis,  setSportVis] = useState(false)
     const [particantVis,  setParticantVis] = useState(false)
+    const [criteriaVis,  setCriteriaVis] = useState(false)
 
     return (
         <div className={styles.container}>
             <Container className="d-flex flex-column mt-5 ">
                 <Button
-                    onClick={() => setCriteriaVis(true)}
+                    onClick={() => setSportVis(true)}
                     variant="outline-secondary" 
                     className="mt-2"
-                    >Добавить критерий оценки
+                    >Добавить спорт
                 </Button>
                 <Button 
                     onClick={() => setParticantVis(true)}
@@ -28,10 +34,18 @@ const Admin = observer(() => {
                     className="mt-2"
                     >Добавить участника
                 </Button>
-                <CreateСriteria show={criteriaVis} onHide={() => setCriteriaVis(false)}/>
+                <Button 
+                    onClick={() => setCriteriaVis(true)}
+                    variant="outline-secondary" 
+                    className="mt-2"
+                    >Добавить критерий
+                </Button>
+
+                <CreateSport show={sportVis} onHide={() => setSportVis(false)}/>
                 
                 <CreatePatricant show={particantVis} onHide={() => setParticantVis(false)}/>
-    
+
+                <CreateCriteriaName show={criteriaVis} onHide={() => setCriteriaVis(false)}/>
 
             </Container>
         </div>

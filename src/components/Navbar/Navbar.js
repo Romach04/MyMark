@@ -7,7 +7,7 @@ import svgImage from '../../assets/svg/exit.svg'
 import Nav from 'react-bootstrap/Nav';
 
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/logo.ico';
 
 import { ADMIN_ROUTER, SPORT_ROUTER, LOGIN_ROUTER, REGISTRATION_ROUTER } from '../../utils/const';
 

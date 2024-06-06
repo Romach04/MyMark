@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect } from "react";
+
+
 import { Button, Modal, Form} from 'react-bootstrap';
 
 import { getSport } from "../http/particantApi";
-import { saveParticipant } from "../http/adminApi";
+import { saveCriteria } from "../http/adminApi";
 
 
-
-const CreatePatricant = ({show, onHide}) => {
+const CreateCriteriaName = ({show, onHide}) => {
     
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [middle, setMiddle] = useState('');
+    const [criteria, setCriteria] = useState('');
     const [sports, setSports] = useState([]);
     const [selectedSport, setSelectedSport] = useState(null);
       
@@ -31,20 +31,18 @@ const CreatePatricant = ({show, onHide}) => {
 
 
     const addParticipant = async () => {
-      const participantData = {
-          surname,
-          name,
-          middleName: middle,
-          sportEntity: selectedSport
+      const CriteriaData = {
+          sportEntity: selectedSport,
+          criterionName:  criteria
       };
       
-      console.log(participantData);
+      console.log(CriteriaData);
       try {
-          await saveParticipant(participantData);
-          setName('');
-          setSurname('');
-          setMiddle('');
+          await saveCriteria(CriteriaData);
+
+          setCriteria('')
           setSelectedSport(null);
+
           alert('Добавлен успешно');
           onHide();
       } catch (error) {
@@ -69,34 +67,19 @@ const CreatePatricant = ({show, onHide}) => {
         >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Добавить Участника
+          Добавить Критерий
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
 
         <Form>
           <Form.Control
-              value={name}
-              onChange={e => setName(e.target.value)}
-              placeholder={"Введите имя"}
-          />
-      </Form>
-      <Form>
-          <Form.Control
-              className="mt-3"
-              value={surname}
-              onChange={e => setSurname(e.target.value)}
-              placeholder={"Введите фамилию"}
-          />
-      </Form>
-      <Form>
-          <Form.Control
-              className="mt-3"
-              value={middle}
-              onChange={e => setMiddle(e.target.value)}
-              placeholder={"Введите отчество"}
-          />
-      </Form>
+              value={criteria}
+              onChange={e => setCriteria(e.target.value)}
+              placeholder={"Введите критерий оценки"}
+            />
+        </Form>
+
           <Form >
             <Form.Control
                 className="mt-3"
@@ -126,4 +109,4 @@ const CreatePatricant = ({show, onHide}) => {
     );
 };
 
-export default CreatePatricant;
+export default CreateCriteriaName;

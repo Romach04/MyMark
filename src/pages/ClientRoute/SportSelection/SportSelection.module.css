@@ -78,7 +78,16 @@ h2{
 }
 
 .button__container{
-    margin-top: 11%;
+    margin-top: 100px;
+}
+
+
+.next__button{
+    margin-top: 20px;
+    font-size: 15px;
+    width: 245px;
+    height: 48px; 
+   
 }
 
 .spinner{

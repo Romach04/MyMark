@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-
+import Button from 'react-bootstrap/Button';
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { LOGIN_ROUTER } from '../../../utils/const';
 import { registerUser } from "../../../components/http/userApi";
@@ -159,9 +159,11 @@ const Registraion = observer(() => {
 
                     <div className={styles.registraion__button}>
 
-                        <button type="submit" disabled={!formik.isValid}>
+                        
+
+                        <Button type="submit"  variant="primary" disabled={!formik.isValid}>
                                 Зарегистрироваться
-                        </button>
+                        </Button>
                         
                     </div>
 

@@ -40,7 +40,7 @@ h2{
     display: flex;
     justify-content: space-between;
 }
-
+/* 
 .login__item input{
     text-align: center;
     font-weight: 500;
@@ -48,8 +48,20 @@ h2{
     height: 33px;
     background-color: #f9f0f0;
 
-}
+} */
 
+
+.login__item input {
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid #ced8e2; /* Добавить границу цвета Bootstrap primary */
+    height: 33px;
+    background-color: #f9f0f0;/* Задать фон цвета Bootstrap primary */
+    color: #000000; /* Цвет текста белый */
+    border-radius: .25rem; /* Закругленные углы, как у кнопки */
+    padding: .375rem .75rem; /* Отступы, как у кнопки */
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out; /* Плавный переход для изменения цвета */
+}
 
 
 .login__button{
@@ -60,14 +72,8 @@ h2{
 
 .login__button button{
     font-size: 15px;
-    cursor: pointer;
-    font-weight: 500;
-    color: #E89F71;
-    border: 1px solid #E89F71;
     width: 245px;
-    height: 48px;
-    background-color: #fff;
-    
+    height: 48px; 
    
 
 }
