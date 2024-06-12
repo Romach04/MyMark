@@ -129,7 +129,6 @@ const ParticantItem = observer(() => {
     return (
         <div className={styles.participant__container}>
             <h2>{particant._particantItem.surname} {particant._particantItem.name} {particant._particantItem.middleName}</h2>
-            <p>Вид спорта: {particant.selectedSport?.sportName}</p>
 
             <Form className={styles.criteria__form} onSubmit={handleSubmit}>
                 {particant._particantItem.criteriaNames.map((criterion, index) => (
@@ -142,7 +141,7 @@ const ParticantItem = observer(() => {
                             <Form.Control
                                 type="number"
                                 min="0"
-                                step="0.1"
+                                step="any"
                                 value={inputScores[criterion] || ''}
                                 onChange={(e) => handleScoreChange(criterion, e.target.value)}
                                 style={{marginTop: "15px"}}

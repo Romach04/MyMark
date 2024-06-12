@@ -112,7 +112,7 @@ const Login = observer(() => {
                         )}
 
                         <div className={styles.login__item}>
-                            <label>Введите пароль</label>  
+                            <label>Пароль</label>  
                             <input
                                 type="password"
                                 placeholder="Пароль"

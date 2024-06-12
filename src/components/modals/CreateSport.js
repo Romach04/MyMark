@@ -15,11 +15,12 @@ const CreateSport = ({show, onHide}) => {
           
           setValue('');
 
-          setMessage('Оценка успешно добавлена');
+          setMessage('Спорт успешно добавлен');
 
             setTimeout(() => {
                 setMessage('');
                 onHide();
+                window.location.reload();
             }, 2000);
             
           

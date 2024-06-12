@@ -64,7 +64,7 @@ const SportSelection = observer(() => {
     if (loading) {
         return (
 
-        <div className="spinner">
+        <div className={styles.spinner}>
             <Spinner animation="border"/>
         </div>
 

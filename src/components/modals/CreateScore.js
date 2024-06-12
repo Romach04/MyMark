@@ -54,6 +54,7 @@ const CreateScore = ({ show, onHide }) => {
             setTimeout(() => {
                 setMessage('');
                 onHide();
+                window.location.reload();
             }, 2000); // Закрыть окно через 2 секунды после успешного добавления
         } catch (error) {
             if (error.response && error.response.status === 403) {

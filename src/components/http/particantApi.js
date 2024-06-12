@@ -28,7 +28,7 @@ export const getParticipants = async () => {
 export const getParticipantById = async (id) => {
     try {
         const response = await api.get('/participant/' + id);
-        // console.log(response.data);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error get participant:', error);

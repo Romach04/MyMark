@@ -12,10 +12,7 @@ import Login from "./pages/ClientRoute/Login/Login";
 import {REGISTRATION_ROUTER, LOGIN_ROUTER, SPORT_ROUTER, PARTICANT_ROUTER, ADMIN_ROUTER } from "./utils/const";
 
 export const authRoutes = [
-    // {
-    //     path: LOGIN_ROUTER,
-    //     Component: Registraion
-    // },
+ 
     
 ]
 

@@ -48,11 +48,12 @@ const CreatePatricant = ({show, onHide}) => {
         setMiddle('');
         setSelectedSport(null);
 
-        setMessage('Оценка успешно добавлена');
+        setMessage('Участник успешно добавлена');
 
         setTimeout(() => {
             setMessage('');
             onHide();
+            window.location.reload();
         }, 2000); 
 
       } catch (error) {

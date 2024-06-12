@@ -106,7 +106,7 @@ const Registraion = observer(() => {
                         )}
 
                         <div className={styles.registraion__item}>
-                            <label>Введите пароль</label>  
+                            <label>Пароль</label>  
                             <input
                                 type="password"
                                 placeholder="Пароль"
