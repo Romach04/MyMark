@@ -26,8 +26,10 @@ const ParticantItem = observer(() => {
                 const data = await getParticipantById(id);
                 const scoresData = await getScores();
 
-                console.log(data);
-                console.log(scoresData);
+                const userNameStorage = localStorage.getItem('username');
+                // console.log(userNameStorage)
+                // console.log(data);
+                // console.log(scoresData);
 
                 if (Array.isArray(data)) {
                     particant.setParticipants(data);
@@ -41,16 +43,17 @@ const ParticantItem = observer(() => {
                 if (Array.isArray(scoresData)) {
                     particant.setScores(scoresData);
 
-                // Инициализируем оценки и считаем среднее значение только при загрузке данных
-                const initialScores = {};
-                data.criteriaNames.forEach(criterion => {
-                    const scoreObj = scoresData.find(
-                        score => score.participantEntity?.id === parseInt(id) && score.criteriaEntity?.criterionName === criterion
-                    );
-                    initialScores[criterion] = scoreObj ? scoreObj.score : 0;
-                });
-                setScores(initialScores);
-                countAverage(initialScores);
+                    const filteredScores = scoresData.filter(score => score.username === userNameStorage);
+                    // console.log(filteredScores)
+                    const initialScores = {};
+                    data.criteriaNames.forEach(criterion => {
+                        const scoreObj = filteredScores.find(
+                            score => score.participantEntity?.id === parseInt(id) && score.criteriaEntity?.criterionName === criterion
+                        );
+                        initialScores[criterion] = scoreObj ? scoreObj.score : "не найдена";
+                    });
+                    setScores(initialScores);
+                    countAverage(initialScores);
                 } else {
                     particant.setScores([]);
                 }
@@ -66,9 +69,25 @@ const ParticantItem = observer(() => {
     }, [id, particant]);
 
     const countAverage = (scores) => {
-        const scoreValues = Object.values(scores).map(Number);
-        const totalScore = scoreValues.reduce((acc, score) => acc + score, 0);
-        const average = totalScore / scoreValues.length;
+        const scoreValues = Object.values(scores);
+
+        // Убираем строки "не найдена"
+        const newScore = scoreValues.filter((score) => score !== "не найдена");
+
+        // Преобразуем значения в числа
+        const numericScores = newScore.map(Number);
+
+        // Считаем общую сумму
+        const totalScore = numericScores.reduce((acc, score) => acc + score, 0);
+
+        // Считаем среднее значение
+        let average = totalScore / numericScores.length;
+
+        if( isNaN( average)) {
+            average = 0;
+        }
+
+        // Устанавливаем средний балл
         setAverageCount(average);
     };
 

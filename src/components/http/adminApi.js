@@ -52,3 +52,31 @@ export const saveScoreAdmin = async (score) => {
     }
 };
 
+
+export const giveAdminRules = async (user) => {
+    try{
+        const response = await api.post('/register/giveAdminRules', user);
+
+        console.log(response.data);
+        return response.data
+
+    } catch (error) {
+        console.error('Error get score:', error);
+        throw error;
+    }
+}
+
+
+export const takeAdminRules = async (user) => {
+    try{
+        const response = await api.post('/register/takeAdminRules', user);
+
+        console.log(response.data);
+        return response.data
+
+    } catch (error) {
+        console.error('Error get score:', error);
+        throw error;
+    }
+}
+

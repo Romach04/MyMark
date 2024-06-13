@@ -3,12 +3,13 @@ import { observer } from 'mobx-react-lite';
 import styles from './Admin.module.css';
 import CreateSport from "../../../components/modals/CreateSport";
 import CreatePatricant from "../../../components/modals/CreatePatricant";
-
 import CreateCriteriaName from "../../../components/modals/CreateCriteriaName";
-
 import CreateScore from "../../../components/modals/CreateScore";
 
 import { Button, Container } from "react-bootstrap";
+import GiveAdminRules from "../../../components/modals/GiveAdminRules";
+
+import TakeAdminRules from "../../../components/modals/TakeAdminRules";
 
 const Admin = observer(() => {
 
@@ -17,6 +18,9 @@ const Admin = observer(() => {
     const [particantVis,  setParticantVis] = useState(false)
     const [criteriaVis,  setCriteriaVis] = useState(false)
     const [scoreVis,  setScoreVis] = useState(false)
+    const [giveRules, setGiveRules] = useState(false);
+    const [takeRules, setTakeRules] = useState(false);
+
 
     return (
         <div className={styles.container}>
@@ -46,13 +50,13 @@ const Admin = observer(() => {
                     >Добавить оценку
                 </Button>
                 <Button 
-                    onClick={() => setScoreVis(true)}
+                    onClick={() => setGiveRules(true)}
                     variant="outline-secondary" 
                     className="mt-2"
                     >Выдать права администратра
                 </Button>
                 <Button 
-                    onClick={() => setScoreVis(true)}
+                    onClick={() => setTakeRules(true)}
                     variant="outline-secondary" 
                     className="mt-2"
                     >Забрать права администратра
@@ -65,6 +69,10 @@ const Admin = observer(() => {
                 <CreateCriteriaName show={criteriaVis}  onHide={() => setCriteriaVis(false)}/>
 
                 <CreateScore show={scoreVis} onHide={() => setScoreVis(false)}/>
+
+                <GiveAdminRules show={giveRules} onHide={() => setGiveRules(false)}/>
+
+                <TakeAdminRules show={takeRules} onHide={() => setTakeRules(false)}/>
 
             </Container>
         </div>

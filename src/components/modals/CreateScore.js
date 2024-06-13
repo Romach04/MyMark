@@ -15,7 +15,7 @@ const CreateScore = ({ show, onHide }) => {
     const [selectedCriterion, setSelectedCriterion] = useState(null);
     const [score, setScore] = useState('');
     const [message, setMessage] = useState('');
-
+    const [selectedEntite, setSelectedEntite] = useState('');
     useEffect(() => {
         const fetchInitialData = async () => {
             try {
@@ -53,8 +53,6 @@ const CreateScore = ({ show, onHide }) => {
 
             setTimeout(() => {
                 setMessage('');
-                onHide();
-                window.location.reload();
             }, 2000); // Закрыть окно через 2 секунды после успешного добавления
         } catch (error) {
             if (error.response && error.response.status === 403) {
@@ -98,6 +96,8 @@ const CreateScore = ({ show, onHide }) => {
                             const selectedId = parseInt(e.target.value, 10);
                             const selectedPart = participants.find(participant => participant.id === selectedId);
                             setSelectedParticipant(selectedPart);
+                            console.log(selectedPart.sportEntity.sportName)
+                            setSelectedEntite(selectedPart.sportEntity.sportName);
                         }}
                     >
                         <option value="">Выберите участника</option>
@@ -120,11 +120,15 @@ const CreateScore = ({ show, onHide }) => {
                         }}
                     >
                         <option value="">Выберите критерий</option>
-                        {criteria.map(criterion => (
-                            <option key={criterion.id} value={criterion.id}>
-                                {criterion.criterionName} ({criterion.sportEntity.sportName})
-                            </option>
-                        ))}
+                        {console.log(criteria.filter(criteria => criteria.sportEntity.sportName === selectedEntite))}
+                        {criteria
+                            .filter(criteria => criteria.sportEntity.sportName === selectedEntite)
+                            .map(criterion => (
+                                <option key={criterion.id} value={criterion.id}>
+                                    {criterion.criterionName} ({criterion.sportEntity.sportName})
+                                </option>
+                                ))
+                        }
                     </Form.Control>
                 </Form>
                 <Form>

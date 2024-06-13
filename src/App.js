@@ -7,15 +7,15 @@ import './App.css';
 
 const App = ()  => {
 
-  const { user } = useContext(Context);
+  // const { user } = useContext(Context);
 
-  useEffect(() => {
-    user.setIsAuth(false);
-    user.setUsername('');
-    localStorage.removeItem('authorization');
-    localStorage.removeItem('username');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   user.setIsAuth(false);
+  //   user.setUsername('');
+  //   localStorage.removeItem('authorization');
+  //   localStorage.removeItem('username');
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   return (
       <div className="wrapper">
