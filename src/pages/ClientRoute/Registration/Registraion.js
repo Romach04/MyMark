@@ -91,7 +91,7 @@ const Registraion = observer(() => {
                             <label>Логин</label>  
                             <input
                                 type="text"
-                                placeholder="Логин"
+                                placeholder="Введите логин"
                                 value={formik.values.username}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -109,7 +109,7 @@ const Registraion = observer(() => {
                             <label>Пароль</label>  
                             <input
                                 type="password"
-                                placeholder="Пароль"
+                                placeholder="Введите пароль"
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

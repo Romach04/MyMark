@@ -45,6 +45,18 @@ const Admin = observer(() => {
                     className="mt-2"
                     >Добавить оценку
                 </Button>
+                <Button 
+                    onClick={() => setScoreVis(true)}
+                    variant="outline-secondary" 
+                    className="mt-2"
+                    >Выдать права администратра
+                </Button>
+                <Button 
+                    onClick={() => setScoreVis(true)}
+                    variant="outline-secondary" 
+                    className="mt-2"
+                    >Забрать права администратра
+                </Button>
 
                 <CreateSport show={sportVis} onHide={() => setSportVis(false)}/>
                 

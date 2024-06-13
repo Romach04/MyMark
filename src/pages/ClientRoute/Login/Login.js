@@ -59,6 +59,7 @@ const Login = observer(() => {
                     user.setIsAuth(true);
 
                     localStorage.setItem('authorization', true)
+                    localStorage.setItem('username', values.username)
 
                     console.log('Navigating to SPORT_ROUTER');
                     navigate(SPORT_ROUTER);
@@ -97,7 +98,7 @@ const Login = observer(() => {
                             <label>Логин</label>  
                             <input
                                 type="text"
-                                placeholder="Логин"
+                                placeholder="Введите логин"
                                 value={formik.values.username}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -115,7 +116,7 @@ const Login = observer(() => {
                             <label>Пароль</label>  
                             <input
                                 type="password"
-                                placeholder="Пароль"
+                                placeholder="Введите пароль"
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

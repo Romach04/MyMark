@@ -17,6 +17,9 @@ export default class UserStore {
         this.username = username;
     }
 
+    get getUserName(){
+        return this.username;
+    }
 
 
 
