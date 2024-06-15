@@ -84,7 +84,7 @@ const Registraion = observer(() => {
             </div>
 
             <div className={styles.registraion}>
-                <form onSubmit={formik.handleSubmit}>
+                <form className={styles.form} onSubmit={formik.handleSubmit}>
                     <div className={styles.registraion__list}>
 
                         <div className={styles.registraion__item}>

@@ -1,0 +1,56 @@
+.container{
+    display: flex;
+    height: 200px;
+    justify-content: flex-end;
+    align-items: center;
+    color: #3f33338e;
+
+   
+}
+
+.navbar__link{
+    display: inline-block;
+}
+
+
+.logo_image{
+    margin-left: 20px;
+}
+
+
+.logo{
+    margin-right: auto !important;
+}
+
+
+.navbar{
+    margin-bottom: 3%;
+}
+@media (max-width: 700px) {
+
+    .logo{
+        display: none;
+    }
+    .container{
+        justify-content: center;
+        flex: 0 1 auto;
+    }
+    
+    
+  }
+
+
+@media (max-width: 400px) {
+
+
+    .menu_list{
+        justify-content: center;
+        gap: 15px;
+    }
+
+
+}
+
+
+
+

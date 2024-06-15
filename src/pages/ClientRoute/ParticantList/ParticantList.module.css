@@ -1,4 +1,4 @@
-.participant__container{
+.participant__container {
     box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
     background-color: white;
     min-height: 75vh;
@@ -9,21 +9,25 @@
     border-radius: 6%;
 }
 
-.form__search{
+.form__search {
     margin-top: 50px;
+    display: flex;
+    justify-content: center; /* Центрируем элементы внутри */
+    width: 100%;
+    max-width: 800px; /* Максимальная ширина 800px */
 }
 
-.form_input{
+.form_input {
     border-radius: 1rem;
-    padding-left:15px;
-    width: 473px;
+    padding-left: 15px;
+    flex-grow: 1; 
     height: 45px;
-    border:none;
-    background-color: #f9f0f0;;
+    border: none;
+    background-color: #f9f0f0;
+    min-width: 150px; /* Обеспечиваем корректное сжатие в маленьких контейнерах */
 }
 
-
-.form__search button{
+.form__search button {
     margin-left: 10px;
     display: inline-block;
     padding: 10px 20px;
@@ -32,40 +36,54 @@
     color: #ffffff;
     background-color: #e7b3b3;
     border: none;
-    border-radius: 25px; /* Задаем радиус скругления */
+    border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-
-.participant__item{
+.participant__item {
     white-space: nowrap;
     padding: 10px;
     width: 300px;
     height: 50px;
     transition: all 0.2s;
 }
-.participant__item:hover{
+
+.participant__item:hover {
     transform: scale(1.05);
 }
 
-.participant__list{
-
+.participant__list {
     cursor: pointer;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
     gap: 30px;
-
 }
 
-.participant_name{
+.participant_name {
     font-size: large;
 }
 
-
-.spinner{
+.spinner {
     position: absolute;
     top: 50%;
     left: 50%;
 }
+
+
+
+@media (max-width: 300px) {
+    .form__search{
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+}
+
+
+
+
+
+
+

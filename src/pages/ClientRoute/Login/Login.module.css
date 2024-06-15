@@ -6,21 +6,19 @@
     flex-direction: column;
     align-items: center;
     border-radius: 6%;
-    justify-content: center
 }
 
-form{
+.form{
     width: 400px;
 }
 
 .login{
     display: flex;
     justify-content: center;
-    width: 800px;
 }
 
 .login__list{
-    margin-top: 55px;
+    margin-top: 50px;
     display: flex;
     gap: 33px;
     flex-direction: column;
@@ -102,4 +100,20 @@ h2{
 .errorAuth{
     color: red;
 }
+
+@media (max-width: 440px) {
+
+    .form{
+        width: 200px;
+    }
+
+    .login__item{
+        flex-direction: column;
+        gap: 15px
+    }
+    
+    
+    
+} 
+
 

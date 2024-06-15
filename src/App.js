@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { useEffect, useContext } from "react";
-import NavBar from "./components/Navbar/Navbar";
+import NavbarComponent from "./components/Navbar/NavbarComponent";
 import AppRouter from "./components/AppRouter";
 import { Context } from "./index";
 import './App.css';
@@ -20,7 +20,7 @@ const App = ()  => {
   return (
       <div className="wrapper">
         <BrowserRouter>
-          <NavBar/>
+          <NavbarComponent/>
           <AppRouter/>
         </BrowserRouter>
       </div>

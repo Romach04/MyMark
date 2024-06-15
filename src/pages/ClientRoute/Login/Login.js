@@ -91,7 +91,7 @@ const Login = observer(() => {
             </div>
 
             <div className={styles.login}>
-                <form onSubmit={formik.handleSubmit}>
+                <form  className={styles.form} onSubmit={formik.handleSubmit}>
                     <div className={styles.login__list}>
 
                         <div className={styles.login__item}>
